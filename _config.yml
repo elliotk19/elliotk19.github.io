@@ -1,0 +1,76 @@
+# Site Info
+title: Jiwon World
+tagline: 'Python & Data Analysis'
+author : 'Jiwon'
+description: 'A Jekyll theme adapted from <a href="http://lanyon.getpoole.com/" target="_blank">Lanyon</a>. Made by <a href="http://codinfox.github.io" target="_blank">@codinfox</a>.'
+baseurl: ""
+url: ""
+logo: '/public/python_logo.png'
+
+# Site configurations
+gems:
+  - jekyll-paginate
+markdown: kramdown
+kramdown:
+  input: GFM
+excerpt_separator: "<!-- more -->"
+sass:
+  style: compressed
+  sass_dir: _scss    
+paginate: 5
+paginate_path: '/blog/page:num'
+permalink: pretty
+
+version: 1.0.0
+
+# About/contact
+author: 
+  name: rezimitpo
+  description: <strong>Python</strong>을 사랑하는<br/><strong>데이터 분석가</strong></br><strong>초사이어인</strong>이 되자.
+  gravatar: bca2cc18698e1de0b93b265cd30e5ada # md5 hash of your email address
+  contact:
+    #linkedin:  https://www.linkedin.com/in/lizhihao
+    github:    https://github.com/rezimitpo
+    facebook:  https://fb.com/shfidwlsdhkdwk
+    twitter:   https://twitter.com/super_insider
+    instagram: https://instagram.com/super_insider
+    #weibo:     None
+    email:     http://www.google.com/recaptcha/mailhide/d?k=01aiQ15XWNPGgCd-DUFi3pOA==&c=PbcboJG05HbrGDNXnxkLP_Bij40mWYsZsueHnkaGgMs=
+
+# Navigation (2nd level links supported)  
+nav:
+  Home:
+    - '/'
+  Post:
+    - '/blog/'
+    - { Categories: '/blog/categories/'}
+    - { Tags : '/blog/tags/'}
+    - { Data Analysis : '/blog/data/'}
+    - { Python : '/blog/python/'}
+    - { Linux : '/blog/linux/'}
+    - { Raspberry Pi : '/blog/pi/'}
+    - { Machine Learning : '/blog/ml/'}
+    - { Deep Learning : '/blog/dl/'}
+    - { Reinforcement Learning : '/blog/rl/'}
+    - { Paper : '/blog/paper/'}
+    - { Kaggle : '/blog/kaggle/'}
+
+  About me:
+    - '/about/'
+  Github Project:
+    - 'http://github.com/rezimitpo'
+
+# Where are tags and categories displayed
+tag_page: '/blog/tags/'
+category_page: '/blog/categories/'
+apple_page: '/blog/apples/'
+
+
+hero:
+  image: /public/img/welcome.jpg
+  #caption: Original Artwork &copy; <a href="http://yalestewart.deviantart.com/art/We-Will-Be-Giants-370176475">Yale Stewart</a>
+  caption: Hello. This is Jiwon's world.
+# Puglins
+mathjax: true # whether support mathjax
+google_analytics_token: 'UA-106931699-1' # leave blank if you don't want google analytics
+disqus_short_name: 'jiwon' # leave blank if you don't want disqus

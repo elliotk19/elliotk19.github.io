@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Jiwon World</title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2017-10-04T08:21:33+09:00</updated>
+ <id>http://localhost:4000</id>
+ <author>
+   <name>rezimitpo</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>Fast R-CNN</title>
+   <link href="http://localhost:4000/paper/2017/10/03/Fast-RCNN-Paper/"/>
+   <updated>2017-10-03T00:00:00+09:00</updated>
+   <id>http://localhost:4000/paper/2017/10/03/Fast-RCNN Paper</id>
+   <content type="html">&lt;p&gt;ㅁㄴㅇ ㅎㅇㅎㅇ
+작성을 해도 안올라감…&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Markdown Editor 선택</title>
+   <link href="http://localhost:4000/%EA%B8%B0%ED%83%80/2017/10/01/Markdown-Editor-%EC%84%A0%ED%83%9D/"/>
+   <updated>2017-10-01T00:00:00+09:00</updated>
+   <id>http://localhost:4000/%EA%B8%B0%ED%83%80/2017/10/01/Markdown Editor 선택</id>
+   <content type="html">&lt;p&gt;블로그 작성을 아이패드로 하려고 iOS의 여러 마크다운 에디터를 알아봤다.&lt;br /&gt;
+조금 까다로워 보일 수 있지만, 다음 조건 정도는 만족해주는 에디터를 찾았었다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Cloud로 맥북과 연동하기가 쉬워야 한다.&lt;/li&gt;
+  &lt;li&gt;텍스트에디터로서 사용하기 쉬우면 좋겠다.&lt;/li&gt;
+  &lt;li&gt;폴더를 생성하고 파일 이동등을 편하게 해줬으면 좋겠다.&lt;/li&gt;
+  &lt;li&gt;10달러 안쪽이었으면 좋겠다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;위 조건을 만족하는 에디터를 찾던 중, Markdown이라는 에디터를 봤다.&lt;br /&gt;
+앱스토어에서 볼 때 처음에 무슨 중국어로 적혀있길래 꺼려졌지만, 다운받아보니 꽤 쓸만하다.&lt;/p&gt;
+
+&lt;p&gt;앞으로 카페에서 종종… 아이패드로 포스팅을 해보려고 한다.&lt;br /&gt;
+노트북보단 생산성이 떨어지지만, 잘 적응하면 괜찮겠지...?&lt;br /&gt;
+사진 등을 캡쳐하고 편집하는 것만 익숙해지면 잘 활용할 수 있을 것 같다.&lt;/p&gt;
+
+&lt;p&gt;그것도 또 찾아봐야겠군…&lt;/p&gt;
+
+&lt;p&gt;그나저나 여기서 포스팅을 하고나서, 어떻게 바로 깃헙에 올릴 것인지도 문제다.&lt;/p&gt;
+
+&lt;p&gt;여기서 작성하면 Markdown이라는 아이클라우드 폴더에 글이 저장되던데...&lt;/p&gt;
+
+&lt;p&gt;이걸 다시 블로그 폴더/_post/ 로 옮겨줘야 하는 문제가 있다.&lt;/p&gt;
+
+&lt;p&gt;폴더 자체를 마운트 시킬 수 있는건지 알아봐야겠다.&lt;/p&gt;
+
+&lt;p&gt;우선은 직접 파일을 이동시킨 후에, 아이패드 Terminus 앱을 통해 맥 ssh에 접근하여 업로드를 해보자.&lt;/p&gt;
+
+&lt;p&gt;추석 기간동안 적어도 5개 이상은 포스팅을 해봐야지.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>First Posting</title>
+   <link href="http://localhost:4000/%EC%9D%BC%EC%83%81/2017/09/24/First-Post/"/>
+   <updated>2017-09-24T00:00:00+09:00</updated>
+   <id>http://localhost:4000/%EC%9D%BC%EC%83%81/2017/09/24/First Post</id>
+   <content type="html">&lt;p&gt;첫 번째 블로그 포스팅.&lt;/p&gt;
+
+&lt;p&gt;블로그 디렉터리 구조를 어떻게 가져갈까 많은 고민 끝에...&lt;br /&gt;
+일단은 기본 구조를 그대로 따라 가기로 했다.&lt;br /&gt;
+마음에 드는 테마를 고르기까지 몇 달이 걸린건가...ㅋㅋㅋ&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;최근에 산 키보드 사진을 테스트로 올려본다.&lt;br /&gt;
+&lt;img src=&quot;/public/photo/keyboard.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.leopold.co.kr/?doc=cart/item.php&amp;amp;it_id=1490676340&quot;&gt;RealForce 87u 45g 저소음 키보드&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;사무실에서 쓰려고 샀는데, 너무 마음에 든다...ㅎㅎㅎㅎㅎ&lt;br /&gt;
+도각도각X 사각사각O 소리...&lt;/p&gt;
+
+&lt;audio src=&quot;/public/sound/realforce87u.mp3&quot; controls=&quot;&quot; preload=&quot;&quot;&gt;&lt;/audio&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;코드 블럭도 실행해보고…&lt;/p&gt;
+
+&lt;p&gt;$\sum_{i}^{n}a_{i} = \lambda_{n}$&lt;/p&gt;
+
+&lt;p&gt;Latex도 사용해본다..&lt;/p&gt;
+
+&lt;p&gt;앞으로 iPad에서 포스팅 하기 위해, 괜찮은 텍스트 에디터 앱이 있는지 알아봐야겠다.
+간단한 문서작업만큼은 아이패드로 하는게 편하지...&lt;del&gt;(누워서 하고 싶다)&lt;/del&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>
