@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: About me
 ---
 
@@ -9,7 +9,7 @@ title: About me
 
 # 작성중...
 
-## . . . 
+## . . .
 
 
 Thanks for reading!
