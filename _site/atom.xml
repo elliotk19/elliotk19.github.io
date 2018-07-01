@@ -4,7 +4,7 @@
  <title>Elliot's Data Science Portfolio</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-01T19:33:13+09:00</updated>
+ <updated>2018-07-01T19:37:10+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Elliot Kim</name>
@@ -57,7 +57,6 @@
 &lt;p&gt;우선은 직접 파일을 이동시킨 후에, 아이패드 Terminus 앱을 통해 맥 ssh에 접근하여 업로드를 해보자.&lt;/p&gt;
 
 &lt;p&gt;추석 기간동안 적어도 5개 이상은 포스팅을 해봐야지.&lt;/p&gt;
-
 </content>
  </entry>
  

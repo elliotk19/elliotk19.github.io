@@ -1,5 +1,6 @@
 ---
 layout: post
+
 title: Markdown Editor 선택
 category : 기타
 tag : [blog]
@@ -33,4 +34,3 @@ tag : [blog]
 우선은 직접 파일을 이동시킨 후에, 아이패드 Terminus 앱을 통해 맥 ssh에 접근하여 업로드를 해보자.
 
 추석 기간동안 적어도 5개 이상은 포스팅을 해봐야지.
-
