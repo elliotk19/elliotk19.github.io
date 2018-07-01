@@ -2,6 +2,7 @@
 title: Elliot's Data Science Portfolio
 tagline: 'Python & Data Analysis'
 author : Elliot Myunghoon Kim
+email: elliotkim1230@gmail.com
 description: 'A Jekyll theme adapted from <a href="http://lanyon.getpoole.com/" target="_blank">Lanyon</a>. Made by <a href="http://codinfox.github.io" target="_blank">@codinfox</a>.'
 baseurl: ""
 url: ""
@@ -32,7 +33,7 @@ author:
     github:    https://github.com/elliotk19
     facebook:  https://fb.com/elliotk19
     instagram: https://instagram.com/elliot.kim1231
-    email:     elliotkim1230@gmail.com
+    email:     mailto:elliotkim1230@gmail.com
 
 # Navigation (2nd level links supported)
 nav:
@@ -51,7 +52,6 @@ nav:
 # Where are tags and categories displayed
 tag_page: '/blog/tags/'
 category_page: '/blog/categories/'
-apple_page: '/blog/apples/'
 
 
 hero:
@@ -60,5 +60,5 @@ hero:
   caption: Welcome to Elliot's Data Science Portfolio!
 # Puglins
 mathjax: true # whether support mathjax
-google_analytics_token: 'UA-106931699-1' # leave blank if you don't want google analytics
-disqus_short_name: 'elliot' # leave blank if you don't want disqus
+#google_analytics_token: 'UA-106931699-1' # leave blank if you don't want google analytics
+#disqus_short_name: 'elliot' # leave blank if you don't want disqus
