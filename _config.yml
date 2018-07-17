@@ -39,7 +39,7 @@ author:
 nav:
   Home:
     - '/'
-  Post:
+  Posts:
     - '/blog/'
     - { Categories: '/blog/categories/'}
     - { Tags : '/blog/tags/'}

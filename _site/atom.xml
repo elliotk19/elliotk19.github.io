@@ -4,7 +4,7 @@
  <title>Elliot's Data Science Portfolio</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-07-01T19:51:24+09:00</updated>
+ <updated>2018-07-16T19:51:28-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Elliot Kim</name>
@@ -13,28 +13,45 @@
 
  
  <entry>
-   <title>Tutor</title>
-   <link href="http://localhost:4000/%EA%B0%95%EC%9D%98/2018/07/01/Tutor/"/>
-   <updated>2018-07-01T00:00:00+09:00</updated>
-   <id>http://localhost:4000/%EA%B0%95%EC%9D%98/2018/07/01/Tutor</id>
-   <content type="html">&lt;p&gt;테스트를 위해 작성한다.&lt;/p&gt;
+   <title>Intro to PIG Game</title>
+   <link href="http://localhost:4000/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/"/>
+   <updated>2018-07-13T00:00:00-07:00</updated>
+   <id>http://localhost:4000/summer%20camp/2018/07/13/PIG Game: Number of Rolls</id>
+   <content type="html">
 </content>
  </entry>
  
  <entry>
-   <title>Fast R-CNN</title>
-   <link href="http://localhost:4000/paper/2017/10/03/Fast-RCNN-Paper/"/>
-   <updated>2017-10-03T00:00:00+09:00</updated>
-   <id>http://localhost:4000/paper/2017/10/03/Fast-RCNN Paper</id>
-   <content type="html">&lt;p&gt;ㅁㄴㅇ ㅎㅇㅎㅇ
-작성을 해도 안올라감…&lt;/p&gt;
+   <title>Intro to PIG Game</title>
+   <link href="http://localhost:4000/summer%20camp/2018/07/12/PIG-Game/"/>
+   <updated>2018-07-12T00:00:00-07:00</updated>
+   <id>http://localhost:4000/summer%20camp/2018/07/12/PIG Game</id>
+   <content type="html">&lt;p&gt;In the first 4 days of camp, we did many things ranging from the introduction to statistics and Python to us being able to code certain concepts we learned during the statistics lectures. The main concept we talked about was &lt;b&gt; Probability &lt;/b&gt;. By basically discussing about what it is and simulating various situations and games, we were able to get a better understanding of how it worked and how we can utilize it. One of the ways I found  most interesting was when we played a game called PIG.
+&lt;img src=&quot;/public/img/dice.jpg&quot; alt=&quot;Image&quot; /&gt;
+&lt;img src=&quot;/public/img/rules.png&quot; alt=&quot;Image&quot; /&gt; &lt;a href=&quot;https://en.wikipedia.org/wiki/Pig_(dice_game)&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;As shown above, the rules are quite simple and each player can employ various strategies to increase their probability to win this game. However, in any game like this, one cannot count the number of strategies he/she can employ because it can technically be anything. As our class discussed the various strategies we can employ, we finalized it to two: ending the turn on a certain number of rolls or ending the turn on a certain point value. But the problem with manually figuring out the best strategy was an arduous task because two people alternating rolling a die until they reach a certain point value may take a very long time. So this is where &lt;b&gt; Python &lt;/b&gt; comes in,in which can code the different strategies, simulate the game, and conduct multiple trials in a very short period of time. Therefore I will be post more on the different strategies our class discussed and try to conclude what the best strategy is.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Introduction to Summer Camp Posts</title>
+   <link href="http://localhost:4000/summer%20camp/2018/07/08/Introduction-to-COSMOS-Posts/"/>
+   <updated>2018-07-08T00:00:00-07:00</updated>
+   <id>http://localhost:4000/summer%20camp/2018/07/08/Introduction to COSMOS Posts</id>
+   <content type="html">&lt;p&gt;Hello everyone! Starting from today, I started attending a camp called COSMOS (California State Summer School for Mathematics and Science) at University of California, Irvine. In this camp, I am taking a class, or a cluster, called Reasoning About Luck: Probability, Statistics, and Their Uses in Science.
+&lt;img src=&quot;/public/img/COSMOS.png&quot; alt=&quot;Image&quot; /&gt;
+&lt;a href=&quot;http://www.cosmos.uci.edu/cluster-2-reasoning-about-luck-probability-statistics-and-their-uses-in-science/&quot;&gt;COSMOS Course Description&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;COSMOS is a 4 week camp in which we alternate between lectures (from two different professors at the University) and lab days (usually computer labs) in which we usually get together in our project groups to work on our final project. The basis of these projects are from the skillsets we learn from lectures and lab days as we mainly learn how to use Python to analyze statistics. I am very excited to spend my 4 weeks here as I will not only be able to socialize with people whom have similar interests as me but also working with them on a subject I am aspiring to study in the future! So throughout the camp I will be posting various things such as the progress of our final project or certain mini projects we do to demonstrate the skills we’ve learned.
+&lt;img src=&quot;/public/img/computer.png&quot; alt=&quot;Image&quot; /&gt; &lt;img src=&quot;/public/img/campus.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Markdown Editor 선택</title>
    <link href="http://localhost:4000/%EA%B8%B0%ED%83%80/2017/10/01/Markdown-Editor-%EC%84%A0%ED%83%9D/"/>
-   <updated>2017-10-01T00:00:00+09:00</updated>
+   <updated>2017-10-01T00:00:00-07:00</updated>
    <id>http://localhost:4000/%EA%B8%B0%ED%83%80/2017/10/01/Markdown Editor 선택</id>
    <content type="html">&lt;p&gt;블로그 작성을 아이패드로 하려고 iOS의 여러 마크다운 에디터를 알아봤다.&lt;br /&gt;
 조금 까다로워 보일 수 있지만, 다음 조건 정도는 만족해주는 에디터를 찾았었다.&lt;/p&gt;
@@ -72,7 +89,7 @@
  <entry>
    <title>First Posting</title>
    <link href="http://localhost:4000/%EC%9D%BC%EC%83%81/2017/09/24/First-Post/"/>
-   <updated>2017-09-24T00:00:00+09:00</updated>
+   <updated>2017-09-24T00:00:00-07:00</updated>
    <id>http://localhost:4000/%EC%9D%BC%EC%83%81/2017/09/24/First Post</id>
    <content type="html">&lt;p&gt;첫 번째 블로그 포스팅.&lt;/p&gt;
 
