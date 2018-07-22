@@ -216,7 +216,7 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   <div class="post">
     <h1 class="post-title">
       <a href="/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/">
-        Intro to PIG Game
+        PIG Game Strategy Number :One Limiting the Number of Rolls
       </a>
     </h1>
 
@@ -232,7 +232,250 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
     
 
     <article>
-      
+      <p>Since the goal of the PIG Game is to get the most points possible until a 100 before one rolls a 1. So when one makes a strategy regarding the number of rolls, he/she has to be reasonable in that he/she has to approximate the probability of rolling a 1 every time they roll the die. For example, the probability of rolling a 1 in the player’s first turn is 1/6 and the probability increases every subsequent rolls therefore the player has to be careful.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="k">def</span> <span class="nf">computer_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+        <span class="c">#print("Computer's Roll: %d\n" %computer_dice)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">turn</span>
+<span class="k">def</span> <span class="nf">computer1_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+        <span class="c">#print("Computer_1's Roll: %d\n" %computer_dice)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">return</span> <span class="mi">0</span>    
+    <span class="k">return</span> <span class="n">turn</span>
+<span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">c1</span><span class="p">):</span>   
+    <span class="n">computer1_win</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">computer_win</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>      
+        <span class="n">computer_total</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">computer1_total</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">computer_total</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">):</span>       
+            <span class="n">computer_total</span><span class="o">+=</span><span class="n">computer_roll</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">computer1_total</span><span class="o">+=</span><span class="n">computer1_roll</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+            <span class="c">#print("Computer Total: %d\n" %computer_total)</span>
+            <span class="c">#print("Computer_1 Total: %d\n" %computer1_total)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">computer_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
+            <span class="c">#print("Computer1 wins\n")</span>
+            <span class="n">computer_win</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
+            <span class="c">#print("Computer Wins\n")</span>
+            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">computer_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">computer1_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">y</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">play</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>This is my full Python code that allows two computers to simulate a certain number of trials (in this case we can change the ‘100’ in line 49 to the number of trials one wants to simulate) of the PIG Game. Specifically, this simulates 40,000 trials (20x20x100) in that each computer has limits its roll from 1 roll to 20 rolls and simulates 100 trials for each of the situations. So let’s take a closer look at each section of the code.</p>
+
+<header>
+  <h3>Importing Libraries </h3>
+</header>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">pyplot</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>The first part of code imports the necessary libraries needed to simulate the PIG Game. So the two libraries I imported was numpy and matplotlib in which I used numpy for the basic calculations and matplotlib in order to visualize my results into a nice plot.</p>
+<header>
+  <h3>Creating Functions for Simulations </h3>
+</header>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">computer_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>        
+        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">turn</span>
+<span class="k">def</span> <span class="nf">computer1_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>    
+        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">return</span> <span class="mi">0</span>    
+    <span class="k">return</span> <span class="n">turn</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>The next two parts of the code are two functions I made called computer_roll and computer1_roll which are the same but just different function names. By taking the parameter(n) of the number of rolls the user is going to use roll before ending his/her turn, it runs a for loop that runs ‘n’ times to simulate the dice rolls. In the for loop, I made it so that each computer inputs a random integer between 1 and 6 (as shown in lines 4 and 14), thus simulating a dice roll. Since the game of PIG says that whenever a user rolls the number 1 he/she scores no points, I also inputted an if and elif statement regarding that case as shown in lines 5-9 and 15-19. So after the for loop runs n amount of times, this function returns the total score of the user.</p>
+<header>
+  <h3>Creating Functions for Overall Game </h3>
+</header>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">c1</span><span class="p">):</span>   
+    <span class="n">computer1_win</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">computer_win</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>      
+        <span class="n">computer_total</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">computer1_total</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">computer_total</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">):</span>       
+            <span class="n">computer_total</span><span class="o">+=</span><span class="n">computer_roll</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="n">computer1_total</span><span class="o">+=</span><span class="n">computer1_roll</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>            
+        <span class="k">if</span><span class="p">(</span><span class="n">computer_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
+            <span class="n">computer_win</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">elif</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
+            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">computer_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">computer1_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>The next part of the code is a function I made that simulates the overall game. It inputs three parameters (n: Number of simulations, c: number of rolls computer will roll before ending turn, c1: number of rolls computer_1 will roll before ending turn) in which are used to generate the win rate for each computer. How the function works is that it runs a big for loop to generate the number of simulations inputted and in it are two variables that reset every simulation which are the total points of each computer. Then I put a while loop that runs the two dice roll functions until one of the computers reach a total score above 100 which will then cause the while loop to end. This will lead to the if and elif statements in which separates the two cases of computer winning or computer_1 winning as it adds the total number of wins each computer has. As the big for loop runs n number of times, the play function will return the win rate of each computer for each number of rolls each computer rolls before ending its turn.</p>
+<header>
+    <h3>Gathering Data and Plotting </h3>
+  </header>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">y</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">play</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>The final part of the code is using all the functions created before and using them. By employing a nested for loop to gather all the data, I created two arrays (x and y) in which x appends the win rates of computer 1 for every number of rolls they roll before ending its turn. Then y appends all the values in the list x, which will then go back in the nested for loop as the code will then run again for each roll number for computer. This will thus result in generating 100 win rates for each case (20x20) in which y array appends it.
+<img src="/public/img/result.png" alt="Image" /></p>
 
     <article>
     <div class="post-more">
@@ -398,9 +641,11 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 
 <audio src="/public/sound/realforce87u.mp3" controls="" preload=""></audio>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>코드 블럭도 실행해보고…</p>
 
