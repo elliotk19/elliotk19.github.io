@@ -1,0 +1,13 @@
+---
+layout: post
+title: Introduction to Principal Component Analysis (PCA)
+category: Summer Camp
+tag: [COSMOS, Final Project, Camp]
+---
+In our final project, our professor required us to learn and apply a statistical tool called PCA or Principal Component Analysis in the datasets we received. In short, PCA is used to reduce the dimensionality of multi-variable data as it is very applicable when there are many variables or features present. The advantages of the usage of PCA is that it helps identify how data is related/unrelated and does not require previous assumptions about measurements.
+![Image](/public/img/pca.png)
+The image shown above shows the basic steps that are required in a principal component analysis in which involves the gathering of raw data, plotting a correlation/covariance matrix, converting the matrices to eigenvalues and eigenvectors, and lastly projecting those onto the principal component axes. The dataset we received of the human microbiomes consists of 2,913 individual samples gathered from 242 human subjects, measuring approximately 43,000 variables. To physically plot each variable along the xy axis is practically an impossible task, but PCA allows one to reduce the number of variables/features to the main principal components (have the most variance amongst data) for the effective visualization of the data.
+![Image](/public/img/r.png)
+To describe the whole process, after one gets the raw dataset, to create a correlation matrix, he/she has to use the equation shown in the image above to make a matrix made of all the r values calculated.
+![Image](/public/img/eigen.png)
+With the correlation matrix, he/she can use the relationship shown in the image above regarding the eigenvalues and eigenvectors. To describe the relationship in short, when multiplying the correlation matrix with an eigenvector, it would result in its eigenvalue multiplied by the same eigenvector. Since we've already identified how the eigenvalue with the highest magnitude would signify the most variance amongst the variance, using matrix algebra, one can mathematically calculate the eigenvalues and its respective eigenvectors. This overall process is very effective in reducing the dataset since after identifying all the eigenvalues and eigenvectors, we can see how significant each eigenvalue is by dividing the eigenvalue by the total sum of all the eigenvalues. Thus the eigenvalue with the highest ratio would be the main principal component therefore allows the plotting of the data with the most variance. The next and final process of PCA, which is to project these values onto an axes containing the main principal components, cannot really be done by hand as this process a computer must do for you.

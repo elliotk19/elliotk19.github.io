@@ -1,8 +1,8 @@
 ---
 layout: post
-title: PIG Game Strategy Number :One Limiting the Number of Rolls
+title: PIG Game Strategy NumberOne:Limiting the Number of Rolls
 category: Summer Camp
-tag: [COSMOS, Simulation, Camp]
+tag: [COSMOS, Simulation, Camp, PIG Game]
 ---
 Since the goal of the PIG Game is to get the most points possible until a 100 before one rolls a 1. So when one makes a strategy regarding the number of rolls, he/she has to be reasonable in that he/she has to approximate the probability of rolling a 1 every time they roll the die. For example, the probability of rolling a 1 in the player's first turn is 1/6 and the probability increases every subsequent rolls therefore the player has to be careful.
 
@@ -13,7 +13,6 @@ def computer_roll(n):
     turn=0
     for i in range(n):
         computer_dice = np.random.randint(1,7)
-        #print("Computer's Roll: %d\n" %computer_dice)
         if(computer_dice is not 1):
             turn+=computer_dice
         elif(computer_dice==1):
@@ -24,7 +23,6 @@ def computer1_roll(n):
     turn=0
     for i in range(n):
         computer_dice = np.random.randint(1,7)
-        #print("Computer_1's Roll: %d\n" %computer_dice)
         if(computer_dice is not 1):
             turn+=computer_dice
         elif(computer_dice==1):
@@ -40,16 +38,11 @@ def play(n,c,c1):
         while(computer1_total<=100 and computer_total<=100):       
             computer_total+=computer_roll(c)
             computer1_total+=computer1_roll(c1)
-            #print("Computer Total: %d\n" %computer_total)
-            #print("Computer_1 Total: %d\n" %computer1_total)
         if(computer_total>=100):
-            #print("Computer1 wins\n")
             computer_win+=1
         elif(computer1_total>=100):
-            #print("Computer Wins\n")
             computer1_win+=1
     return computer_win/float(n), computer1_win/float(n)
-
 x=[]
 y=[]
 for i in range(1,21):
@@ -121,10 +114,10 @@ def play(n,c,c1):
             computer1_win+=1
     return computer_win/float(n), computer1_win/float(n)
   ```
-  The next part of the code is a function I made that simulates the overall game. It inputs three parameters (n: Number of simulations, c: number of rolls computer will roll before ending turn, c1: number of rolls computer_1 will roll before ending turn) in which are used to generate the win rate for each computer. How the function works is that it runs a big for loop to generate the number of simulations inputted and in it are two variables that reset every simulation which are the total points of each computer. Then I put a while loop that runs the two dice roll functions until one of the computers reach a total score above 100 which will then cause the while loop to end. This will lead to the if and elif statements in which separates the two cases of computer winning or computer_1 winning as it adds the total number of wins each computer has. As the big for loop runs n number of times, the play function will return the win rate of each computer for each number of rolls each computer rolls before ending its turn.
-  <header>
-    <h3>Gathering Data and Plotting </h3>
-  </header>
+  The next part of the code is a function I made that simulates the overall game. It inputs three parameters (n: Number of simulations for each situation, c: number of rolls computer will roll before ending turn, c1: number of rolls computer_1 will roll before ending turn) in which are used to generate the win rate for each computer. How the function works is that it runs a big for loop to generate the number of simulations inputted and in it are two variables that reset every simulation which are the total points of each computer. Then I put a while loop that runs the two dice roll functions until one of the computers reach a total score above 100 which will then cause the while loop to end. This will lead to the if and elif statements in which separates the two cases of computer winning or computer_1 winning as it adds the total number of wins each computer has. As the big for loop runs n number of times, the play function will return the win rate of each computer for each number of rolls each computer rolls before ending its turn.
+<header>
+  <h3>Gathering Data and Plotting </h3>
+</header>
 ```python
 x=[]
 y=[]

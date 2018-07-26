@@ -1,3 +1,1 @@
-# 정지원의 잡동사니 블로그
-
-> 2017/09/24 블로그를 시작하다.
+# Elliot's Data Science Blog

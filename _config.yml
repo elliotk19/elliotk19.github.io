@@ -38,7 +38,7 @@ version: 1.0.0
 # About/contact
 author:
   name: Elliot Kim
-  description: <strong>Python</strong>을 사랑하는<br/><strong>데이터 분석가</strong></br><strong>초사이어인</strong>이 되자.
+  description: "Data is the new oil?\n No: Data is the new soil"
   gravatar: 3447a97633c3d1f380ce7d703e9100a5 # md5 hash of your email address
   contact:
     github:    https://github.com/elliotk19

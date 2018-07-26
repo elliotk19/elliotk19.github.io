@@ -11,7 +11,7 @@
 
   <title>
     
-      PIG Game Strategy NumberOne:Limiting the Number of Rolls &middot; Elliot's Data Science Portfolio
+      PIG Game Strategy Number Two:Stop at Certain Value per Turn &middot; Elliot's Data Science Portfolio
     
   </title>
 
@@ -213,8 +213,8 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">PIG Game Strategy NumberOne:Limiting the Number of Rolls</h1>
-  <span class="post-date">2018-07-13</span>
+  <h1 class="post-title">PIG Game Strategy Number Two:Stop at Certain Value per Turn</h1>
+  <span class="post-date">2018-07-14</span>
    |
   
     <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
@@ -227,8 +227,7 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   
   
   <article>
-    <p>Since the goal of the PIG Game is to get the most points possible until a 100 before one rolls a 1. So when one makes a strategy regarding the number of rolls, he/she has to be reasonable in that he/she has to approximate the probability of rolling a 1 every time they roll the die. For example, the probability of rolling a 1 in the player’s first turn is 1/6 and the probability increases every subsequent rolls therefore the player has to be careful.</p>
-
+    <p>Now let’s move on to the second strategy my class discussed regarding the PIG Game. The first strategy I discussed earlier was the user ending his/her turn at a certain number of rolls. Now I would like to show how I coded the second strategy which was for the user ending his/her turn on a certain point value. For example if the strategy is stop until scoring 10 points in the turn, the user keeps rolling until the cumulative score for the turn is 10 or more then stops.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -284,13 +283,13 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="k">def</span> <span class="nf">computer_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">):</span>
         <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
         <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">return</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="mi">0</span>    
     <span class="k">return</span> <span class="n">turn</span>
 <span class="k">def</span> <span class="nf">computer1_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
@@ -314,17 +313,17 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
         <span class="k">if</span><span class="p">(</span><span class="n">computer_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
             <span class="n">computer_win</span><span class="o">+=</span><span class="mi">1</span>
         <span class="k">elif</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>            
     <span class="k">return</span> <span class="n">computer_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">computer1_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
 <span class="n">y</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#y-axis, computer</span>
     <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#x-axis, computer 1</span>
         <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">play</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
         <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
@@ -332,8 +331,7 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>This is my full Python code that allows two computers to simulate a certain number of trials (in this case we can change the ‘100’ in line 49 to the number of trials one wants to simulate) of the PIG Game. Specifically, this simulates 40,000 trials (20x20x100) in that each computer has limits its roll from 1 roll to 20 rolls and simulates 100 trials for each of the situations. So let’s take a closer look at each section of the code.</p>
-
+<p>This is my full Python code that does same functions but just coded with different strategies. For this specific code, it also runs 90,000 trials(30x30x100) in that each computer limits the number of points from 1 to 30 and runs 100 simulations for each situation. Just like the previous strategy, let’s take a closer look at each section of the code.</p>
 <header>
   <h3>Importing Libraries </h3>
 </header>
@@ -342,7 +340,7 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 </pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">pyplot</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>The first part of code imports the necessary libraries needed to simulate the PIG Game. So the two libraries I imported was numpy and matplotlib in which I used numpy for the basic calculations and matplotlib in order to visualize my results into a nice plot.</p>
+<p>The first part of code is the same as the previous one in that it also imports numpy and matplotlib. Just like the first strategy, I used numpy for calculations purposes and matplotlib in order to visualize my data better.</p>
 <header>
   <h3>Creating Functions for Simulations </h3>
 </header>
@@ -368,18 +366,18 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 20
 </pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">computer_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>        
+    <span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
         <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">return</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="mi">0</span>    
     <span class="k">return</span> <span class="n">turn</span>
 <span class="k">def</span> <span class="nf">computer1_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>    
+    <span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
             <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
         <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
@@ -387,7 +385,7 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
             <span class="k">return</span> <span class="mi">0</span>    
     <span class="k">return</span> <span class="n">turn</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>The next two parts of the code are two functions I made called computer_roll and computer1_roll which are the same but just different function names. By taking the parameter(n) of the number of rolls the user is going to use roll before ending his/her turn, it runs a for loop that runs ‘n’ times to simulate the dice rolls. In the for loop, I made it so that each computer inputs a random integer between 1 and 6 (as shown in lines 4 and 14), thus simulating a dice roll. Since the game of PIG says that whenever a user rolls the number 1 he/she scores no points, I also inputted an if and elif statement regarding that case as shown in lines 5-9 and 15-19. So after the for loop runs n amount of times, this function returns the total score of the user.</p>
+<p>The next two parts of the code are two functions that simulates each turn of the two computers. I clearly defined each user’s turn by creating two functions called computer_roll and computer1_roll which have the same roll but just for each user. Inside each function, I inputted a parameter ‘n’ in which for the number of points scoring in each turn before ending the turn. After getting the value, the function runs a while loop with the condition of the turn’s cumulative score being less than the parameter ‘n’ being the specified score. In the loop, it inputs a random integer between 1 and 6 like a normal die using numpy.random.randint. Then it goes through an if/else statement regarding the situation when the user rolls a 1 as that results in the user’s cumulative turn score becoming 0 and being forced to end the user’s turn. After going through all the statements, the function returns the turn’s cumulative target score.</p>
 <header>
   <h3>Creating Functions for Overall Game </h3>
 </header>
@@ -413,14 +411,14 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
         <span class="n">computer1_total</span><span class="o">=</span><span class="mi">0</span>
         <span class="k">while</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">computer_total</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">):</span>       
             <span class="n">computer_total</span><span class="o">+=</span><span class="n">computer_roll</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-            <span class="n">computer1_total</span><span class="o">+=</span><span class="n">computer1_roll</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>            
+            <span class="n">computer1_total</span><span class="o">+=</span><span class="n">computer1_roll</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
         <span class="k">if</span><span class="p">(</span><span class="n">computer_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
             <span class="n">computer_win</span><span class="o">+=</span><span class="mi">1</span>
         <span class="k">elif</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>            
     <span class="k">return</span> <span class="n">computer_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">computer1_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>The next part of the code is a function I made that simulates the overall game. It inputs three parameters (n: Number of simulations for each situation, c: number of rolls computer will roll before ending turn, c1: number of rolls computer_1 will roll before ending turn) in which are used to generate the win rate for each computer. How the function works is that it runs a big for loop to generate the number of simulations inputted and in it are two variables that reset every simulation which are the total points of each computer. Then I put a while loop that runs the two dice roll functions until one of the computers reach a total score above 100 which will then cause the while loop to end. This will lead to the if and elif statements in which separates the two cases of computer winning or computer_1 winning as it adds the total number of wins each computer has. As the big for loop runs n number of times, the play function will return the win rate of each computer for each number of rolls each computer rolls before ending its turn.</p>
+<p>The next part of the code simulates the overall PIG Game. It inputs three parameters (n: Number of simulations for each situation, c: number of points computer will try to score before ending turn, c1: number of points computer_1 will try to score before ending turn) in order to generate the win rate of each computer. The play function for this strategy is the exact same as the play function for the first strategy because both functions call the necessary functions and keeps track of the total points for each user. Therefore, there wouldn’t be much difference in each of the codes and the function returning the two win rates of each user.</p>
 <header>
   <h3>Gathering Data and Plotting </h3>
 </header>
@@ -441,13 +439,13 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 15
 </pre></td><td class="rouge-code"><pre><span class="n">x</span><span class="o">=</span><span class="p">[]</span>
 <span class="n">y</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span><span class="c">#y-axis, computer</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#y-axis, computer</span>
     <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span><span class="c">#x-axis, computer 1</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#x-axis, computer 1</span>
         <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">play</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
         <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
@@ -455,9 +453,9 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>The final part of the code is using all the functions created before and using them. By employing a nested for loop to gather all the data, I created two arrays (x and y) in which x appends the win rates of computer 1 for every number of rolls they roll before ending its turn. Then y appends all the values in the list x, which will then go back in the nested for loop as the code will then run again for each roll number for computer. This will thus result in generating 100 win rates for each case (20x20) in which y array appends it.
-<img src="/public/img/result.png" alt="Image" />
-Now the concluding parts of the code is for the visualization of the data in which I used the matplotlib library to depict the win rates of each case. To read this plot, we have to look at what the color bar on the right represents in which shows the win rates ranging from 0-1.(where 0 means 0% winning and 1 meaning 100% win rate) Though the plots will vary every time we run the code since we are using random number generator, in this specific case I can conclude that when computer_1 rolls 5 times and stops has the highest win rate for computer_1. This can be justified by the lightness of the plot when x=5 signifying that the win rates are generally high.</p>
+<p>The final parts of the code iterates the play function so that the x array appends the win rates of computer 1 for every value they try to reach from 1-30. Then the y array appends all the values in the list x, which will then go back in the nested for loop as the code will then run again for each value the users try to score before ending his/her turn.
+<img src="/public/img/imshow.png" alt="Image" />
+Now the concluding parts of the code is for the visualization of the data in which I used the matplotlib library to depict the win rates of each case. To read this plot, we have to look at what the color bar on the right represents in which shows the win rates ranging from 0-1.(where 0 means 0% winning and 1 meaning 100% win rate) Though the plots will vary every time we run the code since we are using random number generator, in this specific case I can conclude that when computer 1 has a highest win rate when he/she ends the turn after scoring 23 points because the column with computer 1 stopping at 23 points is overall the lightest.</p>
 
   </article>
 </div>
@@ -486,9 +484,9 @@ Now the concluding parts of the code is for the visualization of the data in whi
     
       <li>
         <h3>
-          <a href="/summer%20camp/2018/07/14/PIG-Game-Stop-at-Certain-Value/">
-            PIG Game Strategy Number Two:Stop at Certain Value per Turn
-            <small>2018-07-14</small>
+          <a href="/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/">
+            PIG Game Strategy NumberOne:Limiting the Number of Rolls
+            <small>2018-07-13</small>
           </a>
         </h3>
       </li>
@@ -502,8 +500,8 @@ Now the concluding parts of the code is for the visualization of the data in whi
   <div id="disqus_thread"></div>
   <script>
 var disqus_config = function () {
-  this.page.url = 'http://localhost:4000/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/'; // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = '/summer%20camp/2018/07/13/PIG Game: Number of Rolls'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  this.page.url = 'http://localhost:4000/summer%20camp/2018/07/14/PIG-Game-Stop-at-Certain-Value/'; // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/summer%20camp/2018/07/14/PIG Game: Stop at Certain Value'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 (function() {
   var d = document, s = d.createElement('script');

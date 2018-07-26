@@ -11,7 +11,7 @@
 
   <title>
     
-      First Posting &middot; Elliot's Data Science Portfolio
+      Introduction to Principal Component Analysis (PCA) &middot; Elliot's Data Science Portfolio
     
   </title>
 
@@ -52,7 +52,8 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
         </a>
       </div>
       <div class="sidebar-personal-info-section">
-        <p><strong>Python</strong>을 사랑하는<br/><strong>데이터 분석가</strong></br><strong>초사이어인</strong>이 되자.</p>
+        <p>Data is the new oil?
+ No: Data is the new soil</p>
       </div>
       
       
@@ -212,46 +213,25 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">First Posting</h1>
-  <span class="post-date">2017-09-24</span>
+  <h1 class="post-title">Introduction to Principal Component Analysis (PCA)</h1>
+  <span class="post-date">2018-07-19</span>
    |
   
-    <a href="/blog/tags/#keyboard" class="post-tag">keyboard</a>
+    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
   
-    <a href="/blog/tags/#realforce" class="post-tag">realforce</a>
+    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
+  
+    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
   
   
   <article>
-    <p>첫 번째 블로그 포스팅.</p>
-
-<p>블로그 디렉터리 구조를 어떻게 가져갈까 많은 고민 끝에...<br />
-일단은 기본 구조를 그대로 따라 가기로 했다.<br />
-마음에 드는 테마를 고르기까지 몇 달이 걸린건가...ㅋㅋㅋ<br /></p>
-
-<p>최근에 산 키보드 사진을 테스트로 올려본다.<br />
-<img src="/public/photo/keyboard.jpg" alt="Image" /></p>
-
-<p><a href="http://www.leopold.co.kr/?doc=cart/item.php&amp;it_id=1490676340">RealForce 87u 45g 저소음 키보드</a></p>
-
-<p>사무실에서 쓰려고 샀는데, 너무 마음에 든다...ㅎㅎㅎㅎㅎ<br />
-도각도각X 사각사각O 소리...</p>
-
-<audio src="/public/sound/realforce87u.mp3" controls="" preload=""></audio>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>코드 블럭도 실행해보고…</p>
-
-<p>$\sum_{i}^{n}a_{i} = \lambda_{n}$</p>
-
-<p>Latex도 사용해본다..</p>
-
-<p>앞으로 iPad에서 포스팅 하기 위해, 괜찮은 텍스트 에디터 앱이 있는지 알아봐야겠다.
-간단한 문서작업만큼은 아이패드로 하는게 편하지...<del>(누워서 하고 싶다)</del></p>
+    <p>In our final project, our professor required us to learn and apply a statistical tool called PCA or Principal Component Analysis in the datasets we received. In short, PCA is used to reduce the dimensionality of multi-variable data as it is very applicable when there are many variables or features present. The advantages of the usage of PCA is that it helps identify how data is related/unrelated and does not require previous assumptions about measurements.
+<img src="/public/img/pca.png" alt="Image" />
+The image shown above shows the basic steps that are required in a principal component analysis in which involves the gathering of raw data, plotting a correlation/covariance matrix, converting the matrices to eigenvalues and eigenvectors, and lastly projecting those onto the principal component axes. The dataset we received of the human microbiomes consists of 2,913 individual samples gathered from 242 human subjects, measuring approximately 43,000 variables. To physically plot each variable along the xy axis is practically an impossible task, but PCA allows one to reduce the number of variables/features to the main principal components (have the most variance amongst data) for the effective visualization of the data.
+<img src="/public/img/r.png" alt="Image" />
+To describe the whole process, after one gets the raw dataset, to create a correlation matrix, he/she has to use the equation shown in the image above to make a matrix made of all the r values calculated.
+<img src="/public/img/eigen.png" alt="Image" />
+With the correlation matrix, he/she can use the relationship shown in the image above regarding the eigenvalues and eigenvectors. To describe the relationship in short, when multiplying the correlation matrix with an eigenvector, it would result in its eigenvalue multiplied by the same eigenvector. Since we’ve already identified how the eigenvalue with the highest magnitude would signify the most variance amongst the variance, using matrix algebra, one can mathematically calculate the eigenvalues and its respective eigenvectors. This overall process is very effective in reducing the dataset since after identifying all the eigenvalues and eigenvectors, we can see how significant each eigenvalue is by dividing the eigenvalue by the total sum of all the eigenvalues. Thus the eigenvalue with the highest ratio would be the main principal component therefore allows the plotting of the data with the most variance. The next and final process of PCA, which is to project these values onto an axes containing the main principal components, cannot really be done by hand as this process a computer must do for you.</p>
 
   </article>
 </div>
@@ -262,27 +242,27 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
     
       <li>
         <h3>
+          <a href="/summer%20camp/2018/07/16/Introduction-to-Final-Project/">
+            Introduction to Final Project
+            <small>2018-07-16</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/summer%20camp/2018/07/14/PIG-Game-Stop-at-Certain-Value/">
+            PIG Game Strategy Number Two:Stop at Certain Value per Turn
+            <small>2018-07-14</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/">
-            PIG Game Strategy Number :One Limiting the Number of Rolls
+            PIG Game Strategy NumberOne:Limiting the Number of Rolls
             <small>2018-07-13</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/summer%20camp/2018/07/12/PIG-Game/">
-            Intro to PIG Game
-            <small>2018-07-12</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/summer%20camp/2018/07/08/Introduction-to-COSMOS-Posts/">
-            Introduction to Summer Camp Posts
-            <small>2018-07-08</small>
           </a>
         </h3>
       </li>
@@ -296,8 +276,8 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   <div id="disqus_thread"></div>
   <script>
 var disqus_config = function () {
-  this.page.url = 'http://localhost:4000/%EC%9D%BC%EC%83%81/2017/09/24/First-Post/'; // Replace PAGE_URL with your page's canonical URL variable
-  this.page.identifier = '/%EC%9D%BC%EC%83%81/2017/09/24/First Post'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  this.page.url = 'http://localhost:4000/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/'; // Replace PAGE_URL with your page's canonical URL variable
+  this.page.identifier = '/summer%20camp/2018/07/19/Final Project Preparation Day 1'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 };
 (function() {
   var d = document, s = d.createElement('script');
