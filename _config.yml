@@ -38,7 +38,7 @@ version: 1.0.0
 # About/contact
 author:
   name: Elliot Kim
-  description: "Data is the new oil?\n No: Data is the new soil"
+  description: "<b>Data is the new oil?\n No: Data is the new soil</b>"
   gravatar: 3447a97633c3d1f380ce7d703e9100a5 # md5 hash of your email address
   contact:
     github:    https://github.com/elliotk19
