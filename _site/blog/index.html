@@ -216,6 +216,222 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/">
+        Using Principal Component Analysis (PCA) Practice Number One:Iris Dataset
+      </a>
+    </h1>
+
+    <span class="post-date">22 Jul 2018</span>
+     | 
+    
+    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
+    
+    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
+    
+    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
+    
+    
+
+    <article>
+      <p>Before directly stepping to the dataset of the human microbiomes, our professor recommended implementing PCA on various example datasets one or two times. The first dataset he provided us data of the three different species of the plant <i>Iris</i> : <i>Iris Setosa, Iris Versicolour , </i>and <i>Iris Virginica.</i> More information about the dataset can be found <a href="https://archive.ics.uci.edu/ml/datasets/Iris">here</a> To basically sum it up, the three classes in the Iris dataset are Iris-setosa (n=50) Iris-versicolor (n=50) Iris-virginica (n=50) and the four features are sepal length(cm), sepal width(cm), petal length(cm), and petal width(cm).</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>    
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="k">def</span> <span class="nf">analysis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">stri</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'principal component '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">principalComponents</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">principalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">principalComponents</span>
+             <span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">stri</span><span class="p">)</span>
+    <span class="n">finalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">principalDf</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s">'class'</span><span class="p">]]],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+            <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Iris-setosa'</span><span class="p">,</span> <span class="s">'Iris-versicolor'</span><span class="p">,</span> <span class="s">'Iris-virginica'</span><span class="p">]</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
+                <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">finalDf</span><span class="p">[</span><span class="s">'class'</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                           <span class="p">,</span> <span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+                           <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span>
+                           <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+<span class="n">filepath_or_buffer</span><span class="o">=</span><span class="s">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span><span class="p">,</span>
+<span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'sepal_len'</span><span class="p">,</span> <span class="s">'sepal_wid'</span><span class="p">,</span> <span class="s">'petal_len'</span><span class="p">,</span> <span class="s">'petal_wid'</span><span class="p">,</span> <span class="s">'class'</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">"all"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>            
+<span class="n">analysis</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>                             
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>This is the basic code I coded in order to perform an effective PCA comparing each of the first n principal components with one another so that I can observe any clustering of each of the Iris petals. So now let’s take a closer look at each part of the code.</p>
+<h3> Importing Libraries </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>    
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>To start the code, I imported the necessary libraries needed to perform the PCA. So I imported 4 main libraries: pandas, numpy, matplotlib, and sklearn. Pandas is mainly used to organize data structures so that one can view certain data in various persepctives. Numpy is mainly used for any type of calculations or math related since it can perform basically any types of mathematical functions. Matplotlib is mainly used to visualize a certain dataset so that one can physically see the results of a certain situation. Finally, I imported the StandardScaler and the PCA from sklearn.decomposition because these are the necessary components of PCA humans cannot physically do by hand yet only computers can handle.</p>
+<h3> Loading the Dataset </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+<span class="n">filepath_or_buffer</span><span class="o">=</span><span class="s">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span><span class="p">,</span>
+<span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>The next part of the code is actually loading the dataset into a pandas dataframe so that I could easily organize, drop, or add certain rows/columns. First I created a pandas dataframe that read the csv file from the given filepath. One can see two more parameters that are part of the pd.read_csv function which are ‘header’ and ‘sep’. I specifically set the header=None because if you didn’t put anything in there, it is set default to header=0 meaning that the first row would automatically set as the header of the dataset. However, one can see from the image below that the specific dataset doesn’t really contain a specific row for header so we have to set the header to nothing and later make adjustments to it. The next parameter, sep or separate, as one can also see in the image below that all the data is separated by a comma so by putting sep=’,’ the computer knows that a comma signifies the next data.
+<img src="/public/img/comma.png" alt="Image" /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'sepal_len'</span><span class="p">,</span> <span class="s">'sepal_wid'</span><span class="p">,</span> <span class="s">'petal_len'</span><span class="p">,</span> <span class="s">'petal_wid'</span><span class="p">,</span> <span class="s">'class'</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">"all"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>        
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>After loading the data in to a pandas dataframe, since I set the header as None, I have to identify the names of the columns in which I did in line 1. The next line of the code is very important in data science which is dealing with rows/columns that contain an extraneous/erroneous value which has a possibility to mess up the whole process. So by executing the second line, I dropped all the rows that contained no information at all so that all rows will have all parts of the data.
+<img src="/public/img/iris.png" alt="Image" />
+The next two lines allow the array x to have stored the data in a form of a 150×4 matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row x can be pictured as a 4-dimensional vector as shown by the picture above. Since the last column with the class only has string values, it will later be used for plotting purposes.</p>
+<h3> Creating the PCA Solver Function </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">analysis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">stri</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'principal component '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">principalComponents</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">principalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">principalComponents</span>
+             <span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">stri</span><span class="p">)</span>
+    <span class="n">finalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">principalDf</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s">'class'</span><span class="p">]]],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>    
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>The next part of the program involves creating the PCA solver that inputs 3 parameters: n- the number of principal components it will compare, df- the raw dataset, and x-the dataset with only the measurements. The first line of the function utilizes the standardizing function in which dataframe x gets standardized. Whether to standardize the data prior to a PCA on the covariance matrix depends on the measurement scales of the original features. Since PCA yields a feature subspace that maximizes the variance along the axes, it makes sense to standardize the data, especially, if it was measured on different scales. Although, all features in the Iris dataset were measured in centimeters, let us continue with the transformation of the data onto unit scale (mean=0 and variance=1), which is a requirement for the optimal performance of many machine learning algorithms. After standardizing, I used to PCA function by giving the correct number of principal components I was trying to compare. There’s also a for loop that runs in the range n which is used for the titling each of the axes when graphing the principal components against one another. So after running through all the PCA functions, I created a finalDf that combined the principalDf that contained the principal components with the list df[‘class’] or the y dataframe we created at the start so that we know which type of flower each data represents.</p>
+<h3> Creating the PCA Solver Function (Graphing part) </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Iris-setosa'</span><span class="p">,</span> <span class="s">'Iris-versicolor'</span><span class="p">,</span> <span class="s">'Iris-virginica'</span><span class="p">]</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
+            <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">finalDf</span><span class="p">[</span><span class="s">'class'</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                       <span class="p">,</span> <span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+                       <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span>
+                       <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>This set of code is still part of the PCA Solver function but only includes the graphing. Talking about the basic structure, I created a nested for loop so that I would compare each of the principal components with one another so we can see the correlation amongst each of the princpal components. In the for loops, I set the figsize as shown, labelled each of the axes using the stri array that contained the axes titles. I also created two more lists: a targets array that included the names of each flower, and a colors array which included the colors of each of the points on the graph. Making both arrays, I created scatter plot in which plotted each of the principal components with each flower being labelled by a different color.</p>
+<h3> Analyzing the Results </h3>
+<p><img src="/public/img/iris.png" alt="Image" />
+This is the graph when setting n as two as we compare the first two principal components of the Iris dataset. As shown by the clustering of each of the colors(or the flowers) PCA allowed us to conclude that there are relationships amongst the variables as they follow strong general trends. So when an unknown datapoint is given regarding the different variables, with the PCA and the graph it generated we can identify what kind of flower the unkown sample is.</p>
+
+    <article>
+    <div class="post-more">
+      
+      <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
+      
+      <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/">
         Introduction to Principal Component Analysis (PCA)
       </a>
@@ -804,42 +1020,6 @@ Now the concluding parts of the code is for the visualization of the data in whi
       <a href="/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
       
       <a href="/summer%20camp/2018/07/13/PIG-Game-Number-of-Rolls/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/summer%20camp/2018/07/12/PIG-Game/">
-        Intro to PIG Game
-      </a>
-    </h1>
-
-    <span class="post-date">12 Jul 2018</span>
-     | 
-    
-    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
-    
-    <a href="/blog/tags/#simulation" class="post-tag">Simulation</a>
-    
-    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
-    
-    <a href="/blog/tags/#pig-game" class="post-tag">PIG Game</a>
-    
-    
-
-    <article>
-      <p>In the first 4 days of camp, we did many things ranging from the introduction to statistics and Python to us being able to code certain concepts we learned during the statistics lectures. The main concept we talked about was <b> Probability </b>. By basically discussing about what it is and simulating various situations and games, we were able to get a better understanding of how it worked and how we can utilize it. One of the ways I found  most interesting was when we played a game called PIG.
-<img src="/public/img/dice.jpg" alt="Image" />
-<img src="/public/img/rules.png" alt="Image" /> <a href="https://en.wikipedia.org/wiki/Pig_(dice_game)">Source</a></p>
-
-<p>As shown above, the rules are quite simple and each player can employ various strategies to increase their probability to win this game. However, in any game like this, one cannot count the number of strategies he/she can employ because it can technically be anything. As our class discussed the various strategies we can employ, we finalized it to two: ending the turn on a certain number of rolls or ending the turn on a certain point value. But the problem with manually figuring out the best strategy was an arduous task because two people alternating rolling a die until they reach a certain point value may take a very long time. So this is where <b> Python </b> comes in,in which can code the different strategies, simulate the game, and conduct multiple trials in a very short period of time. Therefore I will be post more on the different strategies our class discussed and try to conclude what the best strategy is.</p>
-
-    <article>
-    <div class="post-more">
-      
-      <a href="/summer%20camp/2018/07/12/PIG-Game/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
-      
-      <a href="/summer%20camp/2018/07/12/PIG-Game/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
     </div>
   </div>
   
