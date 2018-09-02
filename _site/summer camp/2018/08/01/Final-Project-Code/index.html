@@ -318,7 +318,6 @@ This is the plot we get after running all the commands using the matplotlib libr
 20
 21
 22
-23
 </pre></td><td class="rouge-code"><pre><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -331,7 +330,6 @@ This is the plot we get after running all the commands using the matplotlib libr
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>        
         <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Urogenital_tract'</span><span class="p">,</span> <span class="s">'Airways'</span><span class="p">,</span> <span class="s">'Skin'</span><span class="p">,</span> <span class="s">'Oral'</span><span class="p">,</span> <span class="s">'Gastrointestinal_tract'</span><span class="p">]</span>
-<span class="c">#         targets = ['Urogenital_tract', 'Airways','Gastrointestinal_tract']</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">,</span><span class="s">'m'</span><span class="p">]</span>        
         <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
             <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">regionlabel</span> <span class="o">==</span> <span class="n">target</span>
@@ -343,6 +341,65 @@ This is the plot we get after running all the commands using the matplotlib libr
         <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+<p>The next part of the code deals with the PCA for the general regions of where the samples were taken which includes the Urogenital tract, Airways, skin, the oral region, and the Gastrointestinal tract. Similar to the PCA Solver created for the past two datasets, the function takes the first n principal components it will try to compare with one another. First I created a separate list for the axes names called stri in which the values changed based on which principal component it was linked with as I was able to plot the graphs.
+<img src="/public/img/pc1.png" alt="Image" />
+<img src="/public/img/pc3.png" alt="Image" />
+As shown by these two graphs of comparing the first four principal components, different regions contain points that are located on a certain line in the PCA graph. Therefore, points that lie on one of the “spokes” of the graph can be classified with a high degree of certainty.</p>
+<h3>PCA Amongst the Specific Regions </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+    <span class="n">Y</span><span class="p">,</span> <span class="n">all_eigvalues</span> <span class="o">=</span> <span class="n">PCASolver</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">numEvec</span><span class="p">)</span>
+    <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">regionlabel</span> <span class="o">==</span> <span class="n">target</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">][:]</span>
+    <span class="n">shortenedspecific</span> <span class="o">=</span> <span class="n">specificregion</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">][:]</span>    
+    <span class="n">unique</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">specificregion</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique</span><span class="p">:</span>
+            <span class="n">unique</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"PC1"</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"PC2"</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">target</span><span class="o">+</span> <span class="s">" PCA"</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>    
+    <span class="k">for</span> <span class="n">specific</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>        
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">shortenedspecific</span> <span class="o">==</span> <span class="n">specific</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Now in order to conduct a better PCA, our group decided to conduct PCA within each of the general regions since the dataset also provided the specific regions the samples were taken from. So by taking the regionlabel and specificregion list we created earlier, we were able to conduct PCA amongst each of the general locations. By creating two more lists, shortenedspecific and unique, I was able to categorize the dataset into which general location it came from so that the graphs would generate the principal components of the specific locations.
+<img src="/public/img/specific.png" alt="Image" />
+As shown by the 5 graphs of each general location, there is very little horizontal variation along PC1 for samples taken from the Urogenital Tract region. Conversely, skin samples experience only slight vertical dispersal and vary almost exclusively in terms of PC1. Samples from the gastrointestinal region are clustered very tightly in the convergence of Oral, Urogenital Tract, and Skin samples. Airways samples nearly mirror those from Skin, but with less density/variation.</p>
+<h3> Future Directions </h3>
+<p>Future research might include applying our PCA algorithm to other sample sets from microbiomes found in the soil and ocean. Also, a more comprehensive dataset on the microbiome samples would allow researchers to recognize more patterns and clusters in the PCA graphs based on unexamined variables, such as age, location, and health. By further examining microbiomes, it could be possible to identify the different properties of the microbes and help cure/prevent certain illnesses.</p>
+<h3> Conclusion </h3>
+<p>As we predicted correctly in the hypothesis, communities of bacteria on different organs are very distinct. PCA showed us that samples from different regions varied directly to a their corresponding principal components; each region showed correlation to their specific OTUs. Our PCA solver ran smoothly, and we performed it on several reduced versions before plugging in the total dataset. We were initially confused about our graphs because unlike most PCA examples, our data did not group together in clusters. However, it makes sense because there is a linear variation of OTUs in specific areas. Some future research would include using our PCA solver on other sample sets from the Human Microbiome Project or from the soil and ocean microbiomes.</p>
+<h3> Works Cited </h3>
+<p>About the Human Microbiome. (2018). Retrieved from https://hmpdacc.org/hmp/overview</p>
+
+<p>Klotter, J. (2010, July). NIH launches Human Microbiome Project. Townsend Letter, (324), 18. Retrieved from http://link.galegroup.com/apps/doc/A231544962/SUIC?u=pleasant_valhs&amp;sid=SUIC&amp;xid=c4109b64</p>
+
+<p>Morgan XC, Huttenhower C (2012) Chapter 12: Human Microbiome Analysis. PLoS Comput Biol 8(12): e1002808. https://doi.org/10.1371/journal.pcbi.1002808</p>
+
+<p>Savage DC. Microbial ecology of the gastrointestinal tract. Annu. Rev. Microbiol. 1977;31:107–133.</p>
 
   </article>
 </div>
@@ -353,27 +410,27 @@ This is the plot we get after running all the commands using the matplotlib libr
     
       <li>
         <h3>
+          <a href="/water/2018/09/02/Water/">
+            Introduction to Korea Water System Project
+            <small>2018-09-02</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/water/2018/09/01/Water2/">
+            Introduction to Korea Water System Project
+            <small>2018-09-01</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/summer%20camp/2018/07/29/Final-Project-Using-PCA/">
             Using Principal Component Analysis (PCA) Final(Abstract,Question, Variables and Hypothesis, and Background):The Human Microbiome Dataset
             <small>2018-07-29</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/summer%20camp/2018/07/26/Second-Pracitce-Using-PCA/">
-            Using Principal Component Analysis (PCA) Practice Number Two:Cars Dataset
-            <small>2018-07-26</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/">
-            Using Principal Component Analysis (PCA) Practice Number One:Iris Dataset
-            <small>2018-07-22</small>
           </a>
         </h3>
       </li>

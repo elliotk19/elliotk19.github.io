@@ -216,6 +216,76 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/water/2018/09/02/Water/">
+        Introduction to Korea Water System Project
+      </a>
+    </h1>
+
+    <span class="post-date">02 Sep 2018</span>
+     | 
+    
+    <a href="/blog/tags/#tap-water" class="post-tag">Tap Water</a>
+    
+    <a href="/blog/tags/#south-korea" class="post-tag">South Korea</a>
+    
+    
+
+    <article>
+      <p>-Why I got interested in this topic
+  -Korea scarce in water
+-brief summary of korean tap water flow
+-How I got the data (screenshot website)
+  -process of finding the specific data(called the place, etc.)
+-Introduction to the datasets
+  -talk about what’s in each sheets (most interesting ones)
+  -talk about statistics that can be compared between countries(daily usage of water per person, etc.)
+    -screenshotted information (DEKSTOP)
+-1.ㅇㅕ기서 가설을 던지고 마무리
+-2.그냥 마무리 하고 다음으로…</p>
+
+    <article>
+    <div class="post-more">
+      
+      <a href="/water/2018/09/02/Water/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
+      
+      <a href="/water/2018/09/02/Water/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/water/2018/09/01/Water2/">
+        Introduction to Korea Water System Project
+      </a>
+    </h1>
+
+    <span class="post-date">01 Sep 2018</span>
+     | 
+    
+    <a href="/blog/tags/#tap-water" class="post-tag">Tap Water</a>
+    
+    <a href="/blog/tags/#south-korea" class="post-tag">South Korea</a>
+    
+    
+
+    <article>
+      <p>-Processed Data to make data by year equal
+-How to process missing data
+  -diff solutions
+-Korean-&gt; English
+-Fixed shape the same for each year</p>
+
+    <article>
+    <div class="post-more">
+      
+      <a href="/water/2018/09/01/Water2/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
+      
+      <a href="/water/2018/09/01/Water2/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/summer%20camp/2018/08/01/Final-Project-Code/">
         Using Principal Component Analysis (PCA) Final(Methods, Code, Analysis/Conclusion, and Future Directions):The Human Microbiome Dataset
       </a>
@@ -326,7 +396,6 @@ This is the plot we get after running all the commands using the matplotlib libr
 20
 21
 22
-23
 </pre></td><td class="rouge-code"><pre><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -339,7 +408,6 @@ This is the plot we get after running all the commands using the matplotlib libr
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>        
         <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Urogenital_tract'</span><span class="p">,</span> <span class="s">'Airways'</span><span class="p">,</span> <span class="s">'Skin'</span><span class="p">,</span> <span class="s">'Oral'</span><span class="p">,</span> <span class="s">'Gastrointestinal_tract'</span><span class="p">]</span>
-<span class="c">#         targets = ['Urogenital_tract', 'Airways','Gastrointestinal_tract']</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">,</span><span class="s">'m'</span><span class="p">]</span>        
         <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
             <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">regionlabel</span> <span class="o">==</span> <span class="n">target</span>
@@ -351,6 +419,65 @@ This is the plot we get after running all the commands using the matplotlib libr
         <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+<p>The next part of the code deals with the PCA for the general regions of where the samples were taken which includes the Urogenital tract, Airways, skin, the oral region, and the Gastrointestinal tract. Similar to the PCA Solver created for the past two datasets, the function takes the first n principal components it will try to compare with one another. First I created a separate list for the axes names called stri in which the values changed based on which principal component it was linked with as I was able to plot the graphs.
+<img src="/public/img/pc1.png" alt="Image" />
+<img src="/public/img/pc3.png" alt="Image" />
+As shown by these two graphs of comparing the first four principal components, different regions contain points that are located on a certain line in the PCA graph. Therefore, points that lie on one of the “spokes” of the graph can be classified with a high degree of certainty.</p>
+<h3>PCA Amongst the Specific Regions </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+    <span class="n">Y</span><span class="p">,</span> <span class="n">all_eigvalues</span> <span class="o">=</span> <span class="n">PCASolver</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">numEvec</span><span class="p">)</span>
+    <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">regionlabel</span> <span class="o">==</span> <span class="n">target</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">][:]</span>
+    <span class="n">shortenedspecific</span> <span class="o">=</span> <span class="n">specificregion</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">][:]</span>    
+    <span class="n">unique</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">specificregion</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique</span><span class="p">:</span>
+            <span class="n">unique</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"PC1"</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"PC2"</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">target</span><span class="o">+</span> <span class="s">" PCA"</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>    
+    <span class="k">for</span> <span class="n">specific</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">colors</span><span class="p">):</span>        
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">shortenedspecific</span> <span class="o">==</span> <span class="n">specific</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Now in order to conduct a better PCA, our group decided to conduct PCA within each of the general regions since the dataset also provided the specific regions the samples were taken from. So by taking the regionlabel and specificregion list we created earlier, we were able to conduct PCA amongst each of the general locations. By creating two more lists, shortenedspecific and unique, I was able to categorize the dataset into which general location it came from so that the graphs would generate the principal components of the specific locations.
+<img src="/public/img/specific.png" alt="Image" />
+As shown by the 5 graphs of each general location, there is very little horizontal variation along PC1 for samples taken from the Urogenital Tract region. Conversely, skin samples experience only slight vertical dispersal and vary almost exclusively in terms of PC1. Samples from the gastrointestinal region are clustered very tightly in the convergence of Oral, Urogenital Tract, and Skin samples. Airways samples nearly mirror those from Skin, but with less density/variation.</p>
+<h3> Future Directions </h3>
+<p>Future research might include applying our PCA algorithm to other sample sets from microbiomes found in the soil and ocean. Also, a more comprehensive dataset on the microbiome samples would allow researchers to recognize more patterns and clusters in the PCA graphs based on unexamined variables, such as age, location, and health. By further examining microbiomes, it could be possible to identify the different properties of the microbes and help cure/prevent certain illnesses.</p>
+<h3> Conclusion </h3>
+<p>As we predicted correctly in the hypothesis, communities of bacteria on different organs are very distinct. PCA showed us that samples from different regions varied directly to a their corresponding principal components; each region showed correlation to their specific OTUs. Our PCA solver ran smoothly, and we performed it on several reduced versions before plugging in the total dataset. We were initially confused about our graphs because unlike most PCA examples, our data did not group together in clusters. However, it makes sense because there is a linear variation of OTUs in specific areas. Some future research would include using our PCA solver on other sample sets from the Human Microbiome Project or from the soil and ocean microbiomes.</p>
+<h3> Works Cited </h3>
+<p>About the Human Microbiome. (2018). Retrieved from https://hmpdacc.org/hmp/overview</p>
+
+<p>Klotter, J. (2010, July). NIH launches Human Microbiome Project. Townsend Letter, (324), 18. Retrieved from http://link.galegroup.com/apps/doc/A231544962/SUIC?u=pleasant_valhs&amp;sid=SUIC&amp;xid=c4109b64</p>
+
+<p>Morgan XC, Huttenhower C (2012) Chapter 12: Human Microbiome Analysis. PLoS Comput Biol 8(12): e1002808. https://doi.org/10.1371/journal.pcbi.1002808</p>
+
+<p>Savage DC. Microbial ecology of the gastrointestinal tract. Annu. Rev. Microbiol. 1977;31:107–133.</p>
 
     <article>
     <div class="post-more">
@@ -746,258 +873,6 @@ These graphs shown above occurs when we generate the first two principal compone
       <a href="/summer%20camp/2018/07/26/Second-Pracitce-Using-PCA/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
       
       <a href="/summer%20camp/2018/07/26/Second-Pracitce-Using-PCA/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/">
-        Using Principal Component Analysis (PCA) Practice Number One:Iris Dataset
-      </a>
-    </h1>
-
-    <span class="post-date">22 Jul 2018</span>
-     | 
-    
-    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
-    
-    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
-    
-    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
-    
-    
-
-    <article>
-      <p>Before directly stepping to the dataset of the human microbiomes, our professor recommended implementing PCA on various example datasets one or two times. The first dataset he provided us data of the three different species of the plant <i>Iris</i> : <i>Iris Setosa, Iris Versicolour , </i>and <i>Iris Virginica.</i> More information about the dataset can be found <a href="https://archive.ics.uci.edu/ml/datasets/Iris">here</a> To basically sum it up, the three classes in the Iris dataset are Iris-setosa (n=50) Iris-versicolor (n=50) Iris-virginica (n=50) and the four features are sepal length(cm), sepal width(cm), petal length(cm), and petal width(cm).</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>    
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="k">def</span> <span class="nf">analysis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">stri</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'principal component '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">principalComponents</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">principalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">principalComponents</span>
-             <span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">stri</span><span class="p">)</span>
-    <span class="n">finalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">principalDf</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s">'class'</span><span class="p">]]],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>    
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
-            <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Iris-setosa'</span><span class="p">,</span> <span class="s">'Iris-versicolor'</span><span class="p">,</span> <span class="s">'Iris-virginica'</span><span class="p">]</span>
-            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
-                <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">finalDf</span><span class="p">[</span><span class="s">'class'</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span>
-                <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-                           <span class="p">,</span> <span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
-                           <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span>
-                           <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-<span class="n">filepath_or_buffer</span><span class="o">=</span><span class="s">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span><span class="p">,</span>
-<span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-<span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'sepal_len'</span><span class="p">,</span> <span class="s">'sepal_wid'</span><span class="p">,</span> <span class="s">'petal_len'</span><span class="p">,</span> <span class="s">'petal_wid'</span><span class="p">,</span> <span class="s">'class'</span><span class="p">]</span>
-<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">"all"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>            
-<span class="n">analysis</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>                             
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>This is the basic code I coded in order to perform an effective PCA comparing each of the first n principal components with one another so that I can observe any clustering of each of the Iris petals. So now let’s take a closer look at each part of the code.</p>
-<h3> Importing Libraries </h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>    
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>To start the code, I imported the necessary libraries needed to perform the PCA. So I imported 4 main libraries: pandas, numpy, matplotlib, and sklearn. Pandas is mainly used to organize data structures so that one can view certain data in various persepctives. Numpy is mainly used for any type of calculations or math related since it can perform basically any types of mathematical functions. Matplotlib is mainly used to visualize a certain dataset so that one can physically see the results of a certain situation. Finally, I imported the StandardScaler and the PCA from sklearn.decomposition because these are the necessary components of PCA humans cannot physically do by hand yet only computers can handle.</p>
-<h3> Loading the Dataset </h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-<span class="n">filepath_or_buffer</span><span class="o">=</span><span class="s">'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'</span><span class="p">,</span>
-<span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">','</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>The next part of the code is actually loading the dataset into a pandas dataframe so that I could easily organize, drop, or add certain rows/columns. First I created a pandas dataframe that read the csv file from the given filepath. One can see two more parameters that are part of the pd.read_csv function which are ‘header’ and ‘sep’. I specifically set the header=None because if you didn’t put anything in there, it is set default to header=0 meaning that the first row would automatically set as the header of the dataset. However, one can see from the image below that the specific dataset doesn’t really contain a specific row for header so we have to set the header to nothing and later make adjustments to it. The next parameter, sep or separate, as one can also see in the image below that all the data is separated by a comma so by putting sep=’,’ the computer knows that a comma signifies the next data.
-<img src="/public/img/comma.png" alt="Image" /></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'sepal_len'</span><span class="p">,</span> <span class="s">'sepal_wid'</span><span class="p">,</span> <span class="s">'petal_len'</span><span class="p">,</span> <span class="s">'petal_wid'</span><span class="p">,</span> <span class="s">'class'</span><span class="p">]</span>
-<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">"all"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>        
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>After loading the data in to a pandas dataframe, since I set the header as None, I have to identify the names of the columns in which I did in line 1. The next line of the code is very important in data science which is dealing with rows/columns that contain an extraneous/erroneous value which has a possibility to mess up the whole process. So by executing the second line, I dropped all the rows that contained no information at all so that all rows will have all parts of the data.
-<img src="/public/img/iris.png" alt="Image" />
-The next two lines allow the array x to have stored the data in a form of a 150×4 matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row x can be pictured as a 4-dimensional vector as shown by the picture above. Since the last column with the class only has string values, it will later be used for plotting purposes.</p>
-<h3> Creating the PCA Solver Function </h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">analysis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">df</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">stri</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'principal component '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">principalComponents</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">principalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">principalComponents</span>
-             <span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">stri</span><span class="p">)</span>
-    <span class="n">finalDf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">principalDf</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s">'class'</span><span class="p">]]],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>    
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>The next part of the program involves creating the PCA solver that inputs 3 parameters: n- the number of principal components it will compare, df- the raw dataset, and x-the dataset with only the measurements. The first line of the function utilizes the standardizing function in which dataframe x gets standardized. Whether to standardize the data prior to a PCA on the covariance matrix depends on the measurement scales of the original features. Since PCA yields a feature subspace that maximizes the variance along the axes, it makes sense to standardize the data, especially, if it was measured on different scales. Although, all features in the Iris dataset were measured in centimeters, let us continue with the transformation of the data onto unit scale (mean=0 and variance=1), which is a requirement for the optimal performance of many machine learning algorithms. After standardizing, I used to PCA function by giving the correct number of principal components I was trying to compare. There’s also a for loop that runs in the range n which is used for the titling each of the axes when graphing the principal components against one another. So after running through all the PCA functions, I created a finalDf that combined the principalDf that contained the principal components with the list df[‘class’] or the y dataframe we created at the start so that we know which type of flower each data represents.</p>
-<h3> Creating the PCA Solver Function (Graphing part) </h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td><td class="rouge-code"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
-        <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Iris-setosa'</span><span class="p">,</span> <span class="s">'Iris-versicolor'</span><span class="p">,</span> <span class="s">'Iris-virginica'</span><span class="p">]</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
-            <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">finalDf</span><span class="p">[</span><span class="s">'class'</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-                       <span class="p">,</span> <span class="n">finalDf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span> <span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
-                       <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span>
-                       <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>This set of code is still part of the PCA Solver function but only includes the graphing. Talking about the basic structure, I created a nested for loop so that I would compare each of the principal components with one another so we can see the correlation amongst each of the princpal components. In the for loops, I set the figsize as shown, labelled each of the axes using the stri array that contained the axes titles. I also created two more lists: a targets array that included the names of each flower, and a colors array which included the colors of each of the points on the graph. Making both arrays, I created scatter plot in which plotted each of the principal components with each flower being labelled by a different color.</p>
-<h3> Analyzing the Results </h3>
-<p><img src="/public/img/iris.png" alt="Image" />
-This is the graph when setting n as two as we compare the first two principal components of the Iris dataset. As shown by the clustering of each of the colors(or the flowers) PCA allowed us to conclude that there are relationships amongst the variables as they follow strong general trends. So when an unknown datapoint is given regarding the different variables, with the PCA and the graph it generated we can identify what kind of flower the unknown sample is.</p>
-
-    <article>
-    <div class="post-more">
-      
-      <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
-      
-      <a href="/summer%20camp/2018/07/22/Practice-Using-PCA/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/">
-        Introduction to Principal Component Analysis (PCA)
-      </a>
-    </h1>
-
-    <span class="post-date">19 Jul 2018</span>
-     | 
-    
-    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
-    
-    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
-    
-    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
-    
-    
-
-    <article>
-      <p>In our final project, our professor required us to learn and apply a statistical tool called PCA or Principal Component Analysis in the datasets we received. In short, PCA is used to reduce the dimensionality of multi-variable data as it is very applicable when there are many variables or features present. The advantages of the usage of PCA is that it helps identify how data is related/unrelated and does not require previous assumptions about measurements.
-<img src="/public/img/pca.png" alt="Image" />
-The image shown above shows the basic steps that are required in a principal component analysis in which involves the gathering of raw data, plotting a correlation/covariance matrix, converting the matrices to eigenvalues and eigenvectors, and lastly projecting those onto the principal component axes. The dataset we received of the human microbiomes consists of 2,913 individual samples gathered from 242 human subjects, measuring approximately 43,000 variables. To physically plot each variable along the xy axis is practically an impossible task, but PCA allows one to reduce the number of variables/features to the main principal components (have the most variance amongst data) for the effective visualization of the data.
-<img src="/public/img/r.png" alt="Image" />
-To describe the whole process, after one gets the raw dataset, to create a correlation matrix, he/she has to use the equation shown in the image above to make a matrix made of all the r values calculated.
-<img src="/public/img/eigen.png" alt="Image" />
-With the correlation matrix, he/she can use the relationship shown in the image above regarding the eigenvalues and eigenvectors. To describe the relationship in short, when multiplying the correlation matrix with an eigenvector, it would result in its eigenvalue multiplied by the same eigenvector. Since we’ve already identified how the eigenvalue with the highest magnitude would signify the most variance amongst the variance, using matrix algebra, one can mathematically calculate the eigenvalues and its respective eigenvectors. This overall process is very effective in reducing the dataset since after identifying all the eigenvalues and eigenvectors, we can see how significant each eigenvalue is by dividing the eigenvalue by the total sum of all the eigenvalues. Thus the eigenvalue with the highest ratio would be the main principal component therefore allows the plotting of the data with the most variance. The next and final process of PCA, which is to project these values onto an axes containing the main principal components, cannot really be done by hand as this process a computer must do for you.</p>
-
-    <article>
-    <div class="post-more">
-      
-      <a href="/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
-      
-      <a href="/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
     </div>
   </div>
   
