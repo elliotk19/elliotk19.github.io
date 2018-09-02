@@ -216,6 +216,204 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/summer%20camp/2018/08/01/Final-Project-Code/">
+        Using Principal Component Analysis (PCA) Final(Methods, Code, Analysis/Conclusion, and Future Directions):The Human Microbiome Dataset
+      </a>
+    </h1>
+
+    <span class="post-date">01 Aug 2018</span>
+     | 
+    
+    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
+    
+    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
+    
+    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
+    
+    
+
+    <article>
+      <p>After doing all the research needed for the project, our group now proceeded on the coding part of the project. Unlike the past two datasets I analyzed using PCA, for this specific dataset, I conducted a PCA within a PCA so that I can classify the specific regions from its general locations. So now let’s look into the code in which I classified the code in terms of its purpose.</p>
+<h2>Creating the Base PCA Solver </h2>
+<h5>Importing Libraries </h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>To start the code, I imported the necessary libraries needed to perform the PCA. So I imported 4 main libraries: pandas, numpy, matplotlib, and sklearn. Pandas is mainly used to organize data structures so that one can view certain data in various persepctives. Numpy is mainly used for any type of calculations or math related since it can perform basically any types of mathematical functions. Matplotlib is mainly used to visualize a certain dataset so that one can physically see the results of a certain situation. Finally, I imported the StandardScaler and the PCA from sklearn.decomposition because these are the necessary components of PCA humans cannot physically do by hand yet only computers can handle.</p>
+<h5>Loading and Processing the Dataset </h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">dataF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'otu_table_psn_v13_annotated_total.xlsx'</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">dataF</span> <span class="o">=</span> <span class="n">dataF</span><span class="o">.</span><span class="n">T</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">dataF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">dataF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">regionlabel</span> <span class="o">=</span> <span class="n">dataF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">specificregion</span> <span class="o">=</span> <span class="n">dataF</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>In this part of the code, I created a pandas dataframe by loading the data as an excel file. In the parameters of the read_excel function, it includes the parameter header in which equalled None.
+<img src="/public/img/microexcel.png" alt="Image" />
+The reason I set the header to None is because on the next line, I processed my dataframe so that it becomes the transpose of itself which basically means that the x and y axis switched. As shown in the picture above, taking the transpose of the dataset would follow our information section in that the independent variable would become the gender and the region the sample was taken and the dependent variable being different OTUs. Next, I split the dataframe to 4 different sub-dataframes called features, labels, regionlabel, and specificregion and the data contained in each of the dataframes are self-explanatory by their names.</p>
+<h5>PCA Solver </h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">numEvec</span><span class="o">=</span><span class="mi">8</span>
+<span class="k">def</span> <span class="nf">PCASolver</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">numEvec</span><span class="p">):</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span> <span class="n">numEvec</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Y</span><span class="p">,</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>
+<span class="n">Y</span><span class="p">,</span> <span class="n">all_eigvalues</span> <span class="o">=</span> <span class="n">PCASolver</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">numEvec</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>So the next part of the code deals with creating the base PCA Solver in which takes in the features dataframe and the number of principal components (numEvec) it will analyze. As this function runs, it runs PCA from the library we imported and also standardizes the matrix into the dataframe Y. Thus this specific function outputs the standardized dataframe Y and a list with all the explained varaince ratio of each principal component. What the explained variance can tell you about a principal component is that it shows what percent of the variance of the data each principal component explains.</p>
+<h3>Creating the Variance Plot </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="n">numPCs</span> <span class="o">=</span> <span class="n">numEvec</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">all_eigvalues</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+<span class="n">cum_var_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">percent</span><span class="p">[:</span><span class="n">numPCs</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numPCs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">cum_var_exp</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">'r'</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s">'s'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numPCs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">percent</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">'Cumulative Explained Variance'</span><span class="p">,</span><span class="s">'Eigenvalue'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Explained Variance by Different Principle Components'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>As we ran the PCA solver with the raw dataset, we were able to generate a list called all_eigvalues with the explained variance ratio of each of the eigenvalues. So the next thing I did was to create another list called percent in which multiplied the ratio by 100 so that we can get the percentage as I ordered the percentages in descending order. By organizing the dataset from greatest to least, it would therefore categorize the principal components from the most important to the least important.
+<img src="/public/img/explainedvariance.png" alt="Image" />
+This is the plot we get after running all the commands using the matplotlib library. Basically I created a plot and inside it created bar graphs that signified the explained variance in percent of each of the principal components from the most significant to the least. Also on the plot is a line graph that shows the cumulative explained variance in which shows the sum of the explained variance from pc1~pc(n). Normally, when using PCA and dealing with explained variance, data scientists would use the number of principal components that takes to explain at least 70% of the data. In this case, as shown by the graph the first four principal components represents approximately 70% of the data and we chose to analyze these four principal components.</p>
+<h3>PCA Amongst the General Regions </h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">stri</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">stri</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'PC'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>    
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>        
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">stri</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">'2 component PCA'</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>        
+        <span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Urogenital_tract'</span><span class="p">,</span> <span class="s">'Airways'</span><span class="p">,</span> <span class="s">'Skin'</span><span class="p">,</span> <span class="s">'Oral'</span><span class="p">,</span> <span class="s">'Gastrointestinal_tract'</span><span class="p">]</span>
+<span class="c">#         targets = ['Urogenital_tract', 'Airways','Gastrointestinal_tract']</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'r'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">,</span><span class="s">'m'</span><span class="p">]</span>        
+        <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span><span class="n">colors</span><span class="p">):</span>
+            <span class="n">indicesToKeep</span> <span class="o">=</span> <span class="n">regionlabel</span> <span class="o">==</span> <span class="n">target</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+                       <span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="n">indicesToKeep</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+                       <span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">color</span>
+                       <span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+    <article>
+    <div class="post-more">
+      
+      <a href="/summer%20camp/2018/08/01/Final-Project-Code/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
+      
+      <a href="/summer%20camp/2018/08/01/Final-Project-Code/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/summer%20camp/2018/07/29/Final-Project-Using-PCA/">
+        Using Principal Component Analysis (PCA) Final(Abstract,Question, Variables and Hypothesis, and Background):The Human Microbiome Dataset
+      </a>
+    </h1>
+
+    <span class="post-date">29 Jul 2018</span>
+     | 
+    
+    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
+    
+    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
+    
+    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
+    
+    
+
+    <article>
+      <p>After using PCA for two practice datasets, one of which the professor provided and one that I found by myself, our group decided to move onto the dataset that we needed to analyze for the final project. As introduced and explained on the previous posts regarding the final project, we needed to analyze the human microbiome dataset using PCA. But before getting into the code, let’s first take a look at the informative aspects of the project.</p>
+<h2> Abstract </h2>
+<p>Microbiomes, microscopic communities of bacteria in a particular environment, exist all over the human body and are responsible for carrying out numerous essential biological functions, both good and bad. In fact, bacteria living on the human body outnumber human cells 10 to 1. Despite their tremendous importance, microbiomes are difficult for researchers to study and understand due to their complexity and minuscule scale. Our paper examines data from The Human Microbiome Project, which contains 2,913 individual samples gathered from 242 human subjects, measuring 43,144 variables. Using principal component analysis (PCA) to reduce our multi-dimensional data, we are able to compare the clustering of microbes on various regions of the body. By examining the bacterial composition of these samples and applying PCA, we classified the samples according to the region of the body from which the sample was gathered. By plotting the data points onto the principal component axes and analyzing the linear clustering of the data, we were able to conclude that different parts of the body contain different types of bacteria.</p>
+<h2> Question </h2>
+<p>Utilizing Principal Component Analysis, in what ways can we classify the human microbiome?</p>
+<h2> Variables and Hypothesis </h2>
+<p>The independent variables were the gender and regions from which the samples were taken.
+The dependent variables were the 43,144 different OTUs that were present in the various microbiomes. We hypothesize that PCA will produce clearly distinguishable clusters for each of the regions and genders from which the sample was taken. The Principal Components will be useful for explaining differences in the OTUs present in each microbiome.</p>
+<h2> Background </h2>
+<h5> Human Microbiome Project </h5>
+<p>The <a href="https://www.hmpdacc.org/hmp/overview/">Human Microbiome Project</a> has the mission of generating resources that would enable the comprehensive characterization of the human microbiome and analysis of its role in human health and disease. The data analyzed for this investigation was sourced from the Human Microbiome Project The data set was then checked for mislabeling and sample contamination. We used the variable region 1-3 (V13) OTU table for our analysis.</p>
+<h5> Human Microbiome </h5>
+<p>Microbiomes are communities of bacteria, viruses, fungi, and other microbial organisms that exist all over the bodies of every eukaryotic organism. The specific microbiomes present on the human body are responsible for vital functions such as food digestion, producing vitamins, and recognizing malicious microbes. Disruption or unbalance of microbiomes can cause many health problems, such as cancer, diabetes, obesity, and autoimmune disease. According to the Human Microbiome Project, current research has shown that microbiome research holds the possibility to understand and even treat numerous human maladies. Our research focuses on classifying samples of different microbiomes present in different regions of the human body.</p>
+
+<p>In analyzing the differences between microbiomes present on different regions of the human body, we look at the microbes present in the microbiome sample. Since the technology for sequencing DNA and analyzing the microbiome is relatively young, a traditional system of classifying microbes into species doesn’t exist. Thus, the different varieties of microbes are classified into Operational Taxonomic Units (OTUs). Our data examines the specific OTUs found in each of the samples drawn from different regions of the human body.</p>
+<h5> Principal Component Analysis (PCA) </h5>
+<p>Principal Component Analysis (PCA) is a statistical tool used to reduce the dimensionality of multi-variable data. Because we are unable to visualize data in more than 3 dimensions, PCA must be used to reduce the number of variables/dimensions for effective visualization and classification.</p>
+
+<p>To do this, PCA takes a matrix of size n by m, where n represents the number of samples taken and m represents the number of measurements, and reduces the data into i vectors, or “principal components,” which can be used to project the original data onto new axes.
+<img src="/public/img/before.png" alt="Image" />
+As shown in the picture above, PCA takes a dataset and creates two axes named principal components 1 and 2 so that it presents the data on the left with the most variance as shown on the graph on the right.</p>
+<iframe src="https://drive.google.com/file/d/1jg4YdPflTm-SYvvhZLsoEIU6ZVoKJmRL/preview" width="640" height="480"></iframe>
+
+    <article>
+    <div class="post-more">
+      
+      <a href="/summer%20camp/2018/07/29/Final-Project-Using-PCA/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
+      
+      <a href="/summer%20camp/2018/07/29/Final-Project-Using-PCA/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/summer%20camp/2018/07/26/Second-Pracitce-Using-PCA/">
         Using Principal Component Analysis (PCA) Practice Number Two:Cars Dataset
       </a>
@@ -800,301 +998,6 @@ With the correlation matrix, he/she can use the relationship shown in the image 
       <a href="/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
       
       <a href="/summer%20camp/2018/07/19/Final-Project-Preparation-Day-1/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/summer%20camp/2018/07/16/Introduction-to-Final-Project/">
-        Introduction to Final Project
-      </a>
-    </h1>
-
-    <span class="post-date">16 Jul 2018</span>
-     | 
-    
-    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
-    
-    <a href="/blog/tags/#final-project" class="post-tag">Final Project</a>
-    
-    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
-    
-    
-
-    <article>
-      <p>So with three weeks left in the program, my professor introduced the final project to me which is a group project regarding the analysis of Microbiome datasets. At first, I had zero domain knowledge in the field of microbiomes because biology isn’t really my favorite subject. So I did some basic research to find out what they are and why it is so crucial to get to know about them more.
-<img src="/public/img/biomeinfo.png" alt="Image" />
-<a href="https://en.wikipedia.org/wiki/Microbiota">Source</a> <br />
-As this source quotes, “Microbiota [or microbiomes] have been found to be crucial for immunologic, hormonal and metabolic homeostasis of their host.”
-Just from this line, I realized how important the research in this field was. However, during today’s lecture, not only was the information new, but also the way our group had to analyze the dataset was quite new. Our professor introduced the analysis process called Principal Component Analysis (PCA) in which I will go more in depth in another blog, so I think this process will be rigorous, yet very interesting. <br />
-The main goal of the project is to use PCA to find various relationships or causations that might be useful for certain bacterium. For example, we may locate how a certain bacterium was commonly located at a certain body part and with this information, scientists can take a closer look into such places. I guess it will be a heck of a 3 weeks!</p>
-
-    <article>
-    <div class="post-more">
-      
-      <a href="/summer%20camp/2018/07/16/Introduction-to-Final-Project/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
-      
-      <a href="/summer%20camp/2018/07/16/Introduction-to-Final-Project/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/summer%20camp/2018/07/14/PIG-Game-Stop-at-Certain-Value/">
-        PIG Game Strategy Number Two:Stop at Certain Value per Turn
-      </a>
-    </h1>
-
-    <span class="post-date">14 Jul 2018</span>
-     | 
-    
-    <a href="/blog/tags/#cosmos" class="post-tag">COSMOS</a>
-    
-    <a href="/blog/tags/#simulation" class="post-tag">Simulation</a>
-    
-    <a href="/blog/tags/#camp" class="post-tag">Camp</a>
-    
-    <a href="/blog/tags/#pig-game" class="post-tag">PIG Game</a>
-    
-    
-
-    <article>
-      <p>Now let’s move on to the second strategy my class discussed regarding the PIG Game. The first strategy I discussed earlier was the user ending his/her turn at a certain number of rolls. Now I would like to show how I coded the second strategy which was for the user ending his/her turn on a certain point value. For example if the strategy is stop until scoring 10 points in the turn, the user keeps rolling until the cumulative score for the turn is 10 or more then stops.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="k">def</span> <span class="nf">computer_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
-        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">return</span> <span class="mi">0</span>    
-    <span class="k">return</span> <span class="n">turn</span>
-<span class="k">def</span> <span class="nf">computer1_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
-        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">return</span> <span class="mi">0</span>    
-    <span class="k">return</span> <span class="n">turn</span>
-<span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">c1</span><span class="p">):</span>   
-    <span class="n">computer1_win</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">computer_win</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>      
-        <span class="n">computer_total</span><span class="o">=</span><span class="mi">0</span>
-        <span class="n">computer1_total</span><span class="o">=</span><span class="mi">0</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">computer_total</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">):</span>       
-            <span class="n">computer_total</span><span class="o">+=</span><span class="n">computer_roll</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-            <span class="n">computer1_total</span><span class="o">+=</span><span class="n">computer1_roll</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">computer_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">computer_win</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="k">elif</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>            
-    <span class="k">return</span> <span class="n">computer_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">computer1_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">x</span><span class="o">=</span><span class="p">[]</span>
-<span class="n">y</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#y-axis, computer</span>
-    <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#x-axis, computer 1</span>
-        <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">play</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>This is my full Python code that does same functions but just coded with different strategies. For this specific code, it also runs 90,000 trials(30x30x100) in that each computer limits the number of points from 1 to 30 and runs 100 simulations for each situation. Just like the previous strategy, let’s take a closer look at each section of the code.</p>
-<header>
-  <h3>Importing Libraries </h3>
-</header>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">pyplot</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>The first part of code is the same as the previous one in that it also imports numpy and matplotlib. Just like the first strategy, I used numpy for calculations purposes and matplotlib in order to visualize my data better.</p>
-<header>
-  <h3>Creating Functions for Simulations </h3>
-</header>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">computer_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
-        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">return</span> <span class="mi">0</span>    
-    <span class="k">return</span> <span class="n">turn</span>
-<span class="k">def</span> <span class="nf">computer1_roll</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">turn</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">computer_dice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">computer_dice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">+=</span><span class="n">computer_dice</span>
-        <span class="k">elif</span><span class="p">(</span><span class="n">computer_dice</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">turn</span><span class="o">=</span><span class="mi">0</span>
-            <span class="k">return</span> <span class="mi">0</span>    
-    <span class="k">return</span> <span class="n">turn</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>The next two parts of the code are two functions that simulates each turn of the two computers. I clearly defined each user’s turn by creating two functions called computer_roll and computer1_roll which have the same roll but just for each user. Inside each function, I inputted a parameter ‘n’ in which for the number of points scoring in each turn before ending the turn. After getting the value, the function runs a while loop with the condition of the turn’s cumulative score being less than the parameter ‘n’ being the specified score. In the loop, it inputs a random integer between 1 and 6 like a normal die using numpy.random.randint. Then it goes through an if/else statement regarding the situation when the user rolls a 1 as that results in the user’s cumulative turn score becoming 0 and being forced to end the user’s turn. After going through all the statements, the function returns the turn’s cumulative target score.</p>
-<header>
-  <h3>Creating Functions for Overall Game </h3>
-</header>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="rouge-code"><pre><span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">c1</span><span class="p">):</span>   
-    <span class="n">computer1_win</span><span class="o">=</span><span class="mi">0</span>
-    <span class="n">computer_win</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>      
-        <span class="n">computer_total</span><span class="o">=</span><span class="mi">0</span>
-        <span class="n">computer1_total</span><span class="o">=</span><span class="mi">0</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">computer_total</span><span class="o">&lt;=</span><span class="mi">100</span><span class="p">):</span>       
-            <span class="n">computer_total</span><span class="o">+=</span><span class="n">computer_roll</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-            <span class="n">computer1_total</span><span class="o">+=</span><span class="n">computer1_roll</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">computer_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">computer_win</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="k">elif</span><span class="p">(</span><span class="n">computer1_total</span><span class="o">&gt;=</span><span class="mi">100</span><span class="p">):</span>
-            <span class="n">computer1_win</span><span class="o">+=</span><span class="mi">1</span>            
-    <span class="k">return</span> <span class="n">computer_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">computer1_win</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>The next part of the code simulates the overall PIG Game. It inputs three parameters (n: Number of simulations for each situation, c: number of points computer will try to score before ending turn, c1: number of points computer_1 will try to score before ending turn) in order to generate the win rate of each computer. The play function for this strategy is the exact same as the play function for the first strategy because both functions call the necessary functions and keeps track of the total points for each user. Therefore, there wouldn’t be much difference in each of the codes and the function returning the two win rates of each user.</p>
-<header>
-  <h3>Gathering Data and Plotting </h3>
-</header>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="rouge-code"><pre><span class="n">x</span><span class="o">=</span><span class="p">[]</span>
-<span class="n">y</span><span class="o">=</span><span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#y-axis, computer</span>
-    <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span> <span class="c">#x-axis, computer 1</span>
-        <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span> <span class="n">play</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">t</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-<p>The final parts of the code iterates the play function so that the x array appends the win rates of computer 1 for every value they try to reach from 1-30. Then the y array appends all the values in the list x, which will then go back in the nested for loop as the code will then run again for each value the users try to score before ending his/her turn.
-<img src="/public/img/imshow.png" alt="Image" />
-Now the concluding parts of the code is for the visualization of the data in which I used the matplotlib library to depict the win rates of each case. To read this plot, we have to look at what the color bar on the right represents in which shows the win rates ranging from 0-1.(where 0 means 0% winning and 1 meaning 100% win rate) Though the plots will vary every time we run the code since we are using random number generator, in this specific case I can conclude that when computer 1 has a highest win rate when he/she ends the turn after scoring 23 points because the column with computer 1 stopping at 23 points is overall the lightest.</p>
-
-    <article>
-    <div class="post-more">
-      
-      <a href="/summer%20camp/2018/07/14/PIG-Game-Stop-at-Certain-Value/#disqus_thread"> <i class="fa fa-comments" aria-hidden="true"></i>Comment</a>&nbsp;
-      
-      <a href="/summer%20camp/2018/07/14/PIG-Game-Stop-at-Certain-Value/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Read more</a>
     </div>
   </div>
   
