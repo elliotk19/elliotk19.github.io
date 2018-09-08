@@ -4,7 +4,7 @@
  <title>Elliot's Data Science Portfolio</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-09-02T22:36:58+09:00</updated>
+ <updated>2018-09-08T23:04:56+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Elliot Kim</name>
@@ -13,34 +13,63 @@
 
  
  <entry>
-   <title>Introduction to Korea Water System Project</title>
-   <link href="http://localhost:4000/water/2018/09/02/Water/"/>
-   <updated>2018-09-02T00:00:00+09:00</updated>
-   <id>http://localhost:4000/water/2018/09/02/Water</id>
-   <content type="html">&lt;p&gt;-Why I got interested in this topic
-  -Korea scarce in water
--brief summary of korean tap water flow
--How I got the data (screenshot website)
-  -process of finding the specific data(called the place, etc.)
--Introduction to the datasets
+   <title>Searching and Processing the South Korean Tap Water Data</title>
+   <link href="http://localhost:4000/water/2018/08/17/Water2/"/>
+   <updated>2018-08-17T00:00:00+09:00</updated>
+   <id>http://localhost:4000/water/2018/08/17/Water2</id>
+   <content type="html">&lt;p&gt;-Introduction to the datasets
   -talk about what’s in each sheets (most interesting ones)
   -talk about statistics that can be compared between countries(daily usage of water per person, etc.)
     -screenshotted information (DEKSTOP)
--1.ㅇㅕ기서 가설을 던지고 마무리
--2.그냥 마무리 하고 다음으로…&lt;/p&gt;
+-Processed Data to make data by year equal
+-How to process missing data
+  -diff solutions
+-Korean-&amp;gt; English
+-Fixed shape the same for each year&lt;/p&gt;
+
+&lt;h2&gt;Searching for Datasets&lt;/h2&gt;
+&lt;p&gt;After conducting a brief research regarding the problems Korea has about fresh water and about the tap water system, I was finally able to somewhat set a goal for the project and started constructing the base of the project: finding the proper and applicable dataset that was worthy of analyzing. The process wasn’t too complicated as I basically went to google and looked up ‘Korean Water Statistics’ in Korean and just went through the top pages.
+&lt;img src=&quot;/public/img/find.png&quot; alt=&quot;Image&quot; /&gt;
+By going to the first website and going through the information, I wasn’t really satisfied with the data they provided. This is because I wanted to be able to download certain datasets whether it be in a form of a txt file or an excel sheet, so that I can actually analyze the information in ways they haven’t tried. However, as shown by the picture of the website below, it provided mere generalizations and simple diagrams so that users can understand the information easier.
+&lt;img src=&quot;/public/img/kwater.png&quot; alt=&quot;Image&quot; /&gt;
+Knowing I wouldn’t be able to find the dataset I wanted, I decided to call the service center to ask where I could get the certain dataset I wanted. Kindly, the customer service center led me to another website which I would’ve never imagined to access and find what I wanted which was the website of the Ministry of Environment. I was able to look into the website with the specific section regarding the waterways and I was able to somewhat get the dataset I wanted.
+&lt;img src=&quot;/public/img/gov.png&quot; alt=&quot;Image&quot; /&gt;
+As the website took me to the page shown above, it presented me to downloadable waterway datasets from 2011 all the way to 2015 which was very nice for me because now I could be able to compare certain variables by its time value and how certain aspects changed/continued over time.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/elliotk19.github.io/public/Combined_OG.xlsx.zip&quot; download=&quot;Combined_OG.xlsx.zip&quot;&gt;download this&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Introduction to Korea Water System Project</title>
-   <link href="http://localhost:4000/water/2018/09/01/Water2/"/>
-   <updated>2018-09-01T00:00:00+09:00</updated>
-   <id>http://localhost:4000/water/2018/09/01/Water2</id>
-   <content type="html">&lt;p&gt;-Processed Data to make data by year equal
--How to process missing data
-  -diff solutions
--Korean-&amp;gt; English
--Fixed shape the same for each year&lt;/p&gt;
+   <link href="http://localhost:4000/water/2018/08/15/Water/"/>
+   <updated>2018-08-15T00:00:00+09:00</updated>
+   <id>http://localhost:4000/water/2018/08/15/Water</id>
+   <content type="html">&lt;p&gt;After finishing my 4 week summer program at University of California, Irvine and getting a deeper insight into the field of data science, I decided to start another mini project regarding statistics related to the fresh water scarcity in Korea. With this project, I want to apply some of the skills I learned at the camp as well as the various methods of analyzing data I’ve learned myself reading books so that I can generate various conclusions regarding the fresh water scarcity in Korea.&lt;/p&gt;
+&lt;h2&gt; Why this topic? &lt;/h2&gt;
+&lt;p&gt;Water is a topic I was interested in ever since I was young because with my mom working with the Humanitarian aid organization World Vision regarding digging wells for people in Africa with no access to fresh water, I had a personal connection with the lack of fresh water. So as I entered high school, I co-founded a club called Blue Heart which promoted the use of tap water as a solution to the lack of fresh drinkable water as I conducted various research, experiments, and campaigns. Knowing what I am capable of doing and motivated to do in the future, I thought that the combination of my interests in data science and water could best be expressed by executing this  project and get a deeper perception into this subject.&lt;/p&gt;
+&lt;h2&gt; Fresh Water Scarcity in South Korea &lt;/h2&gt;
+&lt;p&gt;Being the 109th biggest country in the world, but the 27th most populated country, South Korea has a high population density, which is 10 times the global average. Fresh water in South Korea makes up just 3% of the total South Korean territory of just under 100,000 square kilometers, as the demand for fresh water far exceeds the supply of it. Along with the population density, other challenges that the country faces while trying to sustain this very high level of water and sanitation services include:
+&lt;img src=&quot;/public/img/rain.jpg&quot; alt=&quot;Image&quot; /&gt;
+&lt;b&gt;Ample but uneven rainfall&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;On average South Korea’s annual rainfall is 1,274mm (about 25% higher than the world average) but the heavy rainfalls of summer often cause flooding while the country typically experiences extended droughts in the winter. Geographically, the southern coastal and mountain regions get most of the rainfall, whereas the northern part of the country is more arid. This is a challenge Korea has to face since rainfall is uncontrollable and the fact that it’s hard to “distribute” rainfall to all parts of South Korea evenly, finding the corresponding solution towards this problem will be a recurring challenge in the future.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Industrialization and Pollution&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Ever since Korea’s economic boom in the late 20th century, the development of the economy and industrialization left aside the imminent consequences, specifically environmental issues, that came with the boom. Since most industrial processes require the mass use of fresh water, the technological boom that has been continuing to this day will be another challenge that Korea will face.
+&lt;img src=&quot;/public/img/imjin.jpg&quot; alt=&quot;Image&quot; /&gt;
+&lt;b&gt;Geopolitical Tensions with North Korea&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;The ongoing tensions with North Korea, geopolitically, have dealt with the construction of several dams on the Imjin river, a major waterway that starts in the north and ends to the northwest of Seoul. With no cooperation between the two countries on flood control, sudden releases of water from the dams without warning have caused flooding and loss of life in South Korea. Dams have been one of the main solutions towards the fresh water problems in order to control the flooding and target the challenge of ample but uneven rainfall by storing the rainfall.&lt;/p&gt;
+
+&lt;h2&gt;Korean Tap Water Flow&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/public/img/waterflow.jpg&quot; alt=&quot;Image&quot; /&gt;
+Source: Arisu&lt;/p&gt;
+
+&lt;p&gt;As mentioned before, the purpose of this project is take a deeper look into the Korean Tap Water system so that I can generate various conclusions and maybe some solutions towards various challenges presented from data. It will also assess to what extent tap water can be a viable alternative as a source of drinkable water. Although I don’t know what type of information or variables I will be analyzing regarding tap water, I do need to have prior knowledge regarding the tap water flow in Korea.&lt;/p&gt;
+
+&lt;p&gt;The diagram presented above provided by the official Korean tap water organization, Arisu, shows the basic flow of tap water in which it goes through a series of processes to ensure the sanitation and the better quality of tap water.&lt;/p&gt;
 </content>
  </entry>
  
