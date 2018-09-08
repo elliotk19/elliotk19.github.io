@@ -225,26 +225,26 @@ MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], proces
   
   
   <article>
-    <p>-Introduction to the datasets
-  -talk about what’s in each sheets (most interesting ones)
-  -talk about statistics that can be compared between countries(daily usage of water per person, etc.)
-    -screenshotted information (DEKSTOP)
--Processed Data to make data by year equal
--How to process missing data
-  -diff solutions
--Korean-&gt; English
--Fixed shape the same for each year</p>
-
-<h2>Searching for Datasets</h2>
+    <h2>Searching for Datasets</h2>
 <p>After conducting a brief research regarding the problems Korea has about fresh water and about the tap water system, I was finally able to somewhat set a goal for the project and started constructing the base of the project: finding the proper and applicable dataset that was worthy of analyzing. The process wasn’t too complicated as I basically went to google and looked up ‘Korean Water Statistics’ in Korean and just went through the top pages.
 <img src="/public/img/find.png" alt="Image" />
 By going to the first website and going through the information, I wasn’t really satisfied with the data they provided. This is because I wanted to be able to download certain datasets whether it be in a form of a txt file or an excel sheet, so that I can actually analyze the information in ways they haven’t tried. However, as shown by the picture of the website below, it provided mere generalizations and simple diagrams so that users can understand the information easier.
 <img src="/public/img/kwater.png" alt="Image" />
 Knowing I wouldn’t be able to find the dataset I wanted, I decided to call the service center to ask where I could get the certain dataset I wanted. Kindly, the customer service center led me to another website which I would’ve never imagined to access and find what I wanted which was the website of the Ministry of Environment. I was able to look into the website with the specific section regarding the waterways and I was able to somewhat get the dataset I wanted.
 <img src="/public/img/gov.png" alt="Image" />
-As the website took me to the page shown above, it presented me to downloadable waterway datasets from 2011 all the way to 2015 which was very nice for me because now I could be able to compare certain variables by its time value and how certain aspects changed/continued over time.</p>
-
-<p><a href="/elliotk19.github.io/public/Combined_OG.xlsx.zip" download="Combined_OG.xlsx.zip">download this</a></p>
+As the website took me to the page shown above, it presented me to downloadable waterway datasets from 2011 all the way to 2015 which was very nice for me because now I could be able to compare certain variables by its time value and how certain aspects changed or continued over time.</p>
+<h2>Introduction to the Datasets</h2>
+<p><img src="/public/img/view.png" alt="Image" />
+The image shown above is a screenshot of just one of the sheets from one dataset (there are a total of 33 sheets for each dataset) as I wanted to show how the raw data was formatted. To give a brief introduction to the dataset I was able to download, it categorizes each variable by each province of Korea as it gives statistics ranging form each part of the tap water flow system to the economic aspects of tap water. Some of the notable sheets I found included information regarding the different prices of tap water by region and data regarding the type and number of complaints citizens from each province had regarding tap water.</p>
+<h2>Generally Processing the Datasets</h2>
+<p><img src="/public/img/changed_view.png" alt="Image" />
+As shown by the previous two images of the datasets, the first one picture showed the raw dataset where I didn’t touch any part of the table, while the second one showed the generally processed dataset as I changed the structure of the table so that it can be analyzed using the Pandas library in Python and got rid of sheets that didn’t have the same independent variable(the different provinces of South Korea). As shown in the raw dataset, the tables aren’t formatted so that there is a clear header and columns because some of the columns are stacked on each other therefore making it impossible to analyze if I were to leave it like that.
+<img src="/public/img/changed_table.png" alt="Image" />
+I took an example from one part of the sheet in which shows the difference from before and after I formatted the headers of the dataset. As shown by the change above, I applied this to all the data in the rest of the sheets as this was very time consuming. Also, as one can see on the reformatted version, the sheet names are by the year of which the data was collected. This was done by combining all the sheets that I thought were necessary into one huge sheet.</p>
+<h5>Checking Consistency in Data</h5>
+<p>When analyzing data, especially when trying to compare by a certain value (by year in my case), consistency amongst data is very important, in that the structure of the data have to be same throughout. For example, the variables each dataset compare or the provinces. that are included all have to be the same. To do this, I used the Pandas library in Python to make sure that there was consistency in the data.</p>
+<h5>Korean-&gt; English Translation</h5>
+<p>As you’ve noticed from the information present on the sheets, most of the data is in Korean and I myself want to present my project in English. So moving on, I will still be using pictures that are in Korean but will be providing an English description/explanation because most of the pictures I use are for visual purposes not informative purposes.</p>
 
   </article>
 </div>
